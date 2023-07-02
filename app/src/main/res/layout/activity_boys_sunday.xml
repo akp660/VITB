@@ -133,7 +133,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/andika"
-                        android:text="Onion Cucimber Raitha, Roti, Chicken Biryani / Paneer Biryani, Masala Dal, Mint Lemon Juice."
+                        android:text="Onion Cucumber Raitha, Roti, Chicken Biryani / Paneer Biryani, Masala Dal, Mint Lemon Juice."
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="14sp" />

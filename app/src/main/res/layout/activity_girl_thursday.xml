@@ -133,7 +133,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/andika"
-                        android:text="Salad, Roti, Plain Rice, Masoor Dal, Aloo Gobi Dry, Sambar / Rasam, Raw Banana Vegitable, Plain Rice, Curd, Fresh Juice."
+                        android:text="Salad, Roti, Plain Rice, Masoor Dal, Aloo Gobi Dry, Sambar / Rasam, Raw Banana Vegetable, Plain Rice, Curd, Fresh Juice."
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="14sp" />

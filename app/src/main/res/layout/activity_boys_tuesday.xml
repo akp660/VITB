@@ -246,7 +246,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/andika"
-                        android:text="Soya Chunks, Kuska, Fruit Custard, Masala DaL, Rice, Roti."
+                        android:text="Soya Chunks, Kuska, Fruit Custard, Masala Dal, Rice, Roti."
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="14sp"/>

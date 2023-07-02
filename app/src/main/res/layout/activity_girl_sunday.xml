@@ -258,7 +258,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/andika"
-                        android:text="Ghee TRice, Roti, Baingan Bharta, Dal Tadka, Rasam, Gulab Jamun."
+                        android:text="Ghee Rice, Roti, Baingan Bharta, Dal Tadka, Rasam, Gulab Jamun."
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="14sp"/>

@@ -258,7 +258,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/andika"
-                        android:text="Roti, Ricde, Dal Tadka, Butter Chicken / Kadai Paneer, Rasam."
+                        android:text="Roti, Rice, Dal Tadka, Butter Chicken / Kadai Paneer, Rasam."
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="14sp" />
