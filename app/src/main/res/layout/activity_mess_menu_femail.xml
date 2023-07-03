@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".mess_menu_femail"
-    android:background="#A0C49D">
+    android:background="#646FD4">
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
-        app:cardBackgroundColor="#C1D0B5"
+        app:cardBackgroundColor="#9BA3EB"
         app:cardCornerRadius="12dp"
         app:cardElevation="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
         app:cardElevation="12dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
-        app:cardBackgroundColor="#C1D0B5"
+        app:cardBackgroundColor="#9BA3EB"
         app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +85,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="45dp"
-        app:cardBackgroundColor="#60C3EF"
+        app:cardBackgroundColor="#DBDFFD"
         app:cardCornerRadius="500dp"
         app:cardElevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
