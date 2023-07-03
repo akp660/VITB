@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".web_view"
-    android:background="#99A98F">
+    android:background="#9BA3EB">
 
     <androidx.cardview.widget.CardView
         android:layout_width="38dp"
         android:layout_height="38dp"
         app:cardCornerRadius="500dp"
         app:cardElevation="12dp"
-        app:cardBackgroundColor="#C1D0B5"
+        app:cardBackgroundColor="#DBDFFD"
         app:layout_constraintBottom_toTopOf="@+id/webview"
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="parent"
