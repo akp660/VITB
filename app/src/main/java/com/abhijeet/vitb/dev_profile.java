@@ -44,9 +44,9 @@ public class dev_profile extends AppCompatActivity {
                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 if (vibrator != null) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE));
+                        vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
                     } else {
-                        vibrator.vibrate(100);
+                        vibrator.vibrate(50);
                     }
                 }
             }
@@ -62,6 +62,14 @@ public class dev_profile extends AppCompatActivity {
             private void gotoUrl(String s) {
                 Uri uri = Uri.parse(s);
                 startActivity(new Intent(Intent.ACTION_VIEW,uri));
+                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                if (vibrator != null) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        vibrator.vibrate(50);
+                    }
+                }
             }
         });
 
@@ -74,6 +82,14 @@ public class dev_profile extends AppCompatActivity {
             private void gotoUrl(String s) {
                 Uri uri = Uri.parse(s);
                 startActivity(new Intent(Intent.ACTION_VIEW,uri));
+                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                if (vibrator != null) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        vibrator.vibrate(50);
+                    }
+                }
             }
 
         });
@@ -87,9 +103,9 @@ public class dev_profile extends AppCompatActivity {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE));
+                vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
             } else {
-                vibrator.vibrate(100);
+                vibrator.vibrate(50);
             }
         }
     }
