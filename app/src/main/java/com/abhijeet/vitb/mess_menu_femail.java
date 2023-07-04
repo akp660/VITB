@@ -72,14 +72,6 @@ public class mess_menu_femail extends AppCompatActivity {
 
                 if (arrDays.equals("Monday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_monday, null);
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    if (vibrator != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            vibrator.vibrate(50);
-                        }
-                    }
                 }
                 if (arrDays.equals("Tuesday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_tuesday, null);
