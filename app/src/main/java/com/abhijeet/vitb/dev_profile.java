@@ -2,9 +2,13 @@ package com.abhijeet.vitb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -37,7 +41,16 @@ public class dev_profile extends AppCompatActivity {
             private void gotoUrl(String s) {
                 Uri uri = Uri.parse(s);
                 startActivity(new Intent(Intent.ACTION_VIEW,uri));
+                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                if (vibrator != null) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        vibrator.vibrate(100);
+                    }
+                }
             }
+
         });
 
         github.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +75,7 @@ public class dev_profile extends AppCompatActivity {
                 Uri uri = Uri.parse(s);
                 startActivity(new Intent(Intent.ACTION_VIEW,uri));
             }
+
         });
 
 
@@ -70,6 +84,14 @@ public class dev_profile extends AppCompatActivity {
     public void home(){
         Intent intent = new Intent(dev_profile.this, MainActivity.class);
         startActivity(intent);
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(100);
+            }
+        }
     }
 
 }

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE));
             } else {
-                vibrator.vibrate(300);
+                vibrator.vibrate(100);
             }
         }
     }
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE));
             } else {
-                vibrator.vibrate(300);
+                vibrator.vibrate(100);
             }
         }
     }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE));
             } else {
-                vibrator.vibrate(300);
+                vibrator.vibrate(100);
             }
         }
     }
