@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class mess_menu_femail extends AppCompatActivity {
 
@@ -48,7 +49,6 @@ public class mess_menu_femail extends AppCompatActivity {
             }
         });
 
-
         arrDays.add("Monday");
         arrDays.add("Tuesday");
         arrDays.add("Wednesday");
@@ -61,83 +61,40 @@ public class mess_menu_femail extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(R.layout.dropdown_view);
         spinner.setAdapter(spinnerAdapter);
 
+        // Get the current day of the week
+        Calendar calendar = Calendar.getInstance();
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        // Set the spinner selection to the current day
+        spinner.setSelection(dayOfWeek - 2);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String arrDays = spinner.getSelectedItem().toString();
-
+                String selectedDay = spinner.getSelectedItem().toString();
 
                 View contentView = null;
 
-                if (arrDays.equals("Monday")) {
+                if (selectedDay.equals("Monday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_monday, null);
-                }
-                if (arrDays.equals("Tuesday")) {
+                } else if (selectedDay.equals("Tuesday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_tuesday, null);
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    if (vibrator != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            vibrator.vibrate(50);
-                        }
-                    }
-                }
-                if (arrDays.equals("Wednesday")) {
+                    vibrateDevice();
+                } else if (selectedDay.equals("Wednesday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_wednesday, null);
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    if (vibrator != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            vibrator.vibrate(50);
-                        }
-                    }
-                }
-                if (arrDays.equals("Thursday")) {
+                    vibrateDevice();
+                } else if (selectedDay.equals("Thursday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_thursday, null);
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    if (vibrator != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            vibrator.vibrate(50);
-                        }
-                    }
-                }
-                if (arrDays.equals("Friday")) {
+                    vibrateDevice();
+                } else if (selectedDay.equals("Friday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_friday, null);
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    if (vibrator != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            vibrator.vibrate(50);
-                        }
-                    }
-                }
-                if (arrDays.equals("Saturday")) {
+                    vibrateDevice();
+                } else if (selectedDay.equals("Saturday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_saturday, null);
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    if (vibrator != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            vibrator.vibrate(50);
-                        }
-                    }
-                }
-                else if (arrDays.equals("Sunday")) {
+                    vibrateDevice();
+                } else if (selectedDay.equals("Sunday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_sunday, null);
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    if (vibrator != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            vibrator.vibrate(50);
-                        }
-                    }
+                    vibrateDevice();
                 }
 
                 FrameLayout contentLayout = findViewById(R.id.constentLayout);
@@ -145,7 +102,6 @@ public class mess_menu_femail extends AppCompatActivity {
                 if (contentView != null) {
                     contentLayout.addView(contentView);
                 }
-
             }
 
             @Override
@@ -153,6 +109,16 @@ public class mess_menu_femail extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void vibrateDevice() {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(50);
+            }
+        }
     }
 }
