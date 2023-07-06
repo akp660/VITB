@@ -71,6 +71,7 @@ public class mess_menu extends AppCompatActivity {
 
                 if (arrDays.equals("Monday")) {
                     contentView = LayoutInflater.from(mess_menu.this).inflate(R.layout.activity_boys_monday, null);
+                    vibrate();
                 } else if (arrDays.equals("Tuesday")) {
                     contentView = LayoutInflater.from(mess_menu.this).inflate(R.layout.activity_boys_tuesday, null);
                     vibrate();

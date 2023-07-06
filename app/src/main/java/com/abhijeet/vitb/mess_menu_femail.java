@@ -77,6 +77,7 @@ public class mess_menu_femail extends AppCompatActivity {
 
                 if (selectedDay.equals("Monday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_monday, null);
+                    vibrateDevice();
                 } else if (selectedDay.equals("Tuesday")) {
                     contentView = LayoutInflater.from(mess_menu_femail.this).inflate(R.layout.activity_girl_tuesday, null);
                     vibrateDevice();
