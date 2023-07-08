@@ -17,19 +17,6 @@ public class loading_screen extends Activity {
 
         new Handler().postDelayed(() -> startActivity(iHome),1500);
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
-            // Start the main activity
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else {
-            // Continue with your normal flow
-            // Set the content view, initialize views, etc.
-            setContentView(R.layout.activity_loading_screen);
-            // Other initialization or setup code...
-        }
-
-        finish();
-
     }
 
 }
