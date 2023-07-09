@@ -64,9 +64,8 @@ public class mess_menu_femail extends AppCompatActivity {
         // Get the current day of the week
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
-        // Set the spinner selection to the current day
-        spinner.setSelection(dayOfWeek - 2);
+        int selectionIndex = (dayOfWeek == Calendar.SUNDAY) ? 6 : (dayOfWeek - 2);
+        spinner.setSelection(selectionIndex);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

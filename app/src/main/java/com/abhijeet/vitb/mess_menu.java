@@ -61,7 +61,8 @@ public class mess_menu extends AppCompatActivity {
         // Automatically select the current day
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        spinner.setSelection(dayOfWeek - 2); // Adjusting for 0-based index and skipping Sunday
+        int selectionIndex = (dayOfWeek == Calendar.SUNDAY) ? 6 : (dayOfWeek - 2);
+        spinner.setSelection(selectionIndex); // Adjusting for 0-based index and skipping Sunday
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -71,7 +72,6 @@ public class mess_menu extends AppCompatActivity {
 
                 if (arrDays.equals("Monday")) {
                     contentView = LayoutInflater.from(mess_menu.this).inflate(R.layout.activity_boys_monday, null);
-                    vibrate();
                 } else if (arrDays.equals("Tuesday")) {
                     contentView = LayoutInflater.from(mess_menu.this).inflate(R.layout.activity_boys_tuesday, null);
                     vibrate();
