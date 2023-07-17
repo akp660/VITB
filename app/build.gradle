@@ -10,7 +10,7 @@ android {
         applicationId "com.abhijeet.vitb"
         minSdk 26
         targetSdk 33
-        versionCode 5
+        versionCode 6
         versionName "2.5.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
