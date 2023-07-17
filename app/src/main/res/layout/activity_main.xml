@@ -42,7 +42,7 @@
         android:id="@+id/lottieAnimationView2"
         android:layout_width="402sp"
         android:layout_height="379sp"
-        app:layout_constraintBottom_toTopOf="@+id/lottieAnimationView3"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -63,50 +63,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView2" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="35dp"
+        android:text="It will help us finding you the right mess menu."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
-        android:layout_width="150sp"
-        android:layout_height="150sp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="30pt"
+        android:id="@+id/lottieAnimationView3"
+        android:layout_width="220sp"
+        android:layout_height="220sp"
+        android:layout_marginBottom="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/book" />
+        app:lottie_rawRes="@raw/female" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/capriola"
+        android:text="Girl's Hostel"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationView3"
+        app:layout_constraintEnd_toEndOf="@+id/lottieAnimationView3"
+        app:layout_constraintStart_toStartOf="@+id/lottieAnimationView3" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView3"
-        android:layout_width="150sp"
-        android:layout_height="150sp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="30pt"
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="220sp"
+        android:layout_height="220sp"
+        android:layout_marginBottom="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/beverage" />
+        app:lottie_rawRes="@raw/male" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
         android:fontFamily="@font/capriola"
-        android:text="Foody"
-        android:textColor="#232323"
-        app:layout_constraintEnd_toEndOf="@+id/lottieAnimationView3"
-        app:layout_constraintStart_toStartOf="@+id/lottieAnimationView3"
-        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView3" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:fontFamily="@font/capriola"
-        android:text="Vtop"
-        android:textColor="#232323"
+        android:text="Boy's Hostel"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationView"
         app:layout_constraintEnd_toEndOf="@+id/lottieAnimationView"
-        app:layout_constraintStart_toStartOf="@+id/lottieAnimationView"
-        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
+        app:layout_constraintStart_toStartOf="@+id/lottieAnimationView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

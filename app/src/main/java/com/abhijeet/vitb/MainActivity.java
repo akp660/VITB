@@ -20,17 +20,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         LottieAnimationView lottieAnimationView = findViewById(R.id.lottieAnimationView);
-        lottieAnimationView.setOnClickListener(view -> vtop());
+        lottieAnimationView.setOnClickListener(view -> boys());
 
         LottieAnimationView lottieAnimationView3 = findViewById(R.id.lottieAnimationView3);
-        lottieAnimationView3.setOnClickListener(view -> foody());
+        lottieAnimationView3.setOnClickListener(view -> girl());
 
         LottieAnimationView developer = findViewById(R.id.profile);
         developer.setOnClickListener(view -> profile());
     }
 
-    public void vtop(){
-        Intent intent = new Intent(MainActivity.this, web_view.class);
+    public void boys(){
+        Intent intent = new Intent(MainActivity.this, mess_menu.class);
         startActivity(intent);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator != null) {
@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void foody() {
-        Intent intent = new Intent(MainActivity.this, hostel_selection.class);
+    public void girl() {
+        Intent intent = new Intent(MainActivity.this, mess_menu_femail.class);
         startActivity(intent);
 
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
