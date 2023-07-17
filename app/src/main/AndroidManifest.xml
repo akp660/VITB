@@ -28,9 +28,6 @@
             android:name=".dev_profile"
             android:exported="false" />
         <activity
-            android:name=".hostel_selection"
-            android:exported="false" />
-        <activity
             android:name=".web_view"
             android:exported="false" />
         <activity
