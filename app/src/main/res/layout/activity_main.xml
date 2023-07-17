@@ -70,7 +70,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="35dp"
         android:text="It will help us finding you the right mess menu."
-        android:textColor="#2C2C2C"
+        android:textColor="#404040"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
