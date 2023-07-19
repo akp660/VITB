@@ -10,8 +10,8 @@ android {
         applicationId "com.abhijeet.vitb"
         minSdk 26
         targetSdk 33
-        versionCode 7 // july mess menu updated
-        versionName "2.5.0"
+        versionCode 9 // july mess menu updated
+        versionName "2.5.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
