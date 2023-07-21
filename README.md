@@ -1,2 +1,2 @@
 # VITB
-VITB app at playstore. 
+VITB app at playstore
