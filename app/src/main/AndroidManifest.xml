@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VITB"
         tools:targetApi="31">
+        <activity
+            android:name=".item_food"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".mess_menu_femail"
             android:exported="false" />
@@ -31,7 +37,7 @@
             android:name=".web_view"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Underbelly"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
