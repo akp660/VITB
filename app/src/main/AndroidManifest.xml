@@ -16,7 +16,7 @@
         android:theme="@style/Theme.VITB"
         tools:targetApi="31">
         <activity
-            android:name=".item_food"
+            android:name=".Underbelly"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -37,7 +37,7 @@
             android:name=".web_view"
             android:exported="false" />
         <activity
-            android:name=".Underbelly"
+            android:name=".Mayuris"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

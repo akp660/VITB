@@ -8,14 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
+public class Food_Adapter extends RecyclerView.Adapter<Food_Adapter.FoodViewHolder> {
 
-    private List<Underbelly.FoodItem> foodItemList;
+    private List<Mayuris.FoodItem> food_ItemList;
 
-    public FoodAdapter(List<Underbelly.FoodItem> foodItemList) {
-        this.foodItemList = foodItemList;
+    public Food_Adapter(List<Mayuris.FoodItem> foodItemList) {
+        this.food_ItemList = foodItemList;
     }
-
 
     @NonNull
     @Override
@@ -26,14 +25,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
-        Underbelly.FoodItem foodItem = foodItemList.get(position);
+        Mayuris.FoodItem foodItem = food_ItemList.get(position);
         holder.foodName.setText(foodItem.getName());
         holder.foodPrice.setText(foodItem.getPrice());
     }
 
     @Override
     public int getItemCount() {
-        return foodItemList.size();
+        return food_ItemList.size();
     }
 
     static class FoodViewHolder extends RecyclerView.ViewHolder {
