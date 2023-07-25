@@ -1,6 +1,10 @@
 package com.abhijeet.vitb;
 
+import android.content.ClipData;
 import android.os.Bundle;
+import android.widget.SearchView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +21,7 @@ public class Mayuris extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mayuris);
+
 
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -120,6 +125,7 @@ public class Mayuris extends AppCompatActivity {
         food_Adapter = new Food_Adapter(food_ItemList);
         recyclerView.setAdapter(food_Adapter);
     }
+
 
     // Define the model class for food items
     static class FoodItem {
