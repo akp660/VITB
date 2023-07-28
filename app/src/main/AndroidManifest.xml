@@ -19,7 +19,7 @@
             android:name=".Underbelly"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Mayuris"
             android:exported="false" />
         <activity
             android:name=".mess_menu_femail"
@@ -37,7 +37,7 @@
             android:name=".web_view"
             android:exported="false" />
         <activity
-            android:name=".Mayuris"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

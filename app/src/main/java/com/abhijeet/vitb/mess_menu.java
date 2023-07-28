@@ -25,7 +25,7 @@ public class mess_menu extends AppCompatActivity {
     ImageView refresh_button;
 
     Spinner spinner;
-    ArrayList<String> arrNames = new ArrayList<>();
+    ArrayList<String>  arrNames = new ArrayList<>();
     ArrayList<String> arrDays = new ArrayList<>();
 
     @Override
@@ -54,7 +54,7 @@ public class mess_menu extends AppCompatActivity {
         arrDays.add("Saturday");
         arrDays.add("Sunday");
 
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_view, arrDays);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_view , arrDays);
         spinnerAdapter.setDropDownViewResource(R.layout.dropdown_view);
         spinner.setAdapter(spinnerAdapter);
 
