@@ -1,21 +1,15 @@
 package com.abhijeet.vitb;
 
-import android.content.ClipData;
 import android.os.Bundle;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Mayuris extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private Food_Adapter food_Adapter;
-    private List<FoodItem> food_ItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +17,11 @@ public class Mayuris extends AppCompatActivity {
         setContentView(R.layout.activity_mayuris);
 
 
-        recyclerView = findViewById(R.id.recycler);
+        RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Create dummy data for food items
-        food_ItemList = new ArrayList<>();
+        List<FoodItem> food_ItemList = new ArrayList<>();
         food_ItemList.add(new FoodItem("Regular Tea", "₹15.0"));
         food_ItemList.add(new FoodItem("Ginger Tea", "₹20.0"));
         food_ItemList.add(new FoodItem("Cardamom Tea", "₹20.0"));
@@ -122,15 +116,15 @@ public class Mayuris extends AppCompatActivity {
 
         // Add more food items as needed
 
-        food_Adapter = new Food_Adapter(food_ItemList);
+        Food_Adapter food_Adapter = new Food_Adapter(food_ItemList);
         recyclerView.setAdapter(food_Adapter);
     }
 
 
     // Define the model class for food items
     static class FoodItem {
-        private String name;
-        private String price;
+        private final String name;
+        private final String price;
 
         public FoodItem(String name, String price) {
             this.name = name;
