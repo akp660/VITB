@@ -2,7 +2,6 @@ package com.abhijeet.vitb;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -13,14 +12,13 @@ import com.airbnb.lottie.LottieAnimationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public MainActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-
-
-
 
         LottieAnimationView lottieAnimationView = findViewById(R.id.lottieAnimationView);
         lottieAnimationView.setOnClickListener(view -> boys());
@@ -47,11 +45,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-            } else {
-                vibrator.vibrate(50);
-            }
+            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
         }
     }
 
@@ -62,5 +56,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(a);
 
     }
-
 }

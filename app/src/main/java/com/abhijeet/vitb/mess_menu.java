@@ -1,7 +1,5 @@
 package com.abhijeet.vitb;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -25,7 +25,6 @@ public class mess_menu extends AppCompatActivity {
     ImageView refresh_button;
 
     Spinner spinner;
-    ArrayList<String>  arrNames = new ArrayList<>();
     ArrayList<String> arrDays = new ArrayList<>();
 
     @Override
@@ -67,6 +66,7 @@ public class mess_menu extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
                 String arrDays = spinner.getSelectedItem().toString();
                 View contentView = null;
 
@@ -99,6 +99,8 @@ public class mess_menu extends AppCompatActivity {
                     contentLayout.addView(contentView);
                 }
             }
+
+
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {

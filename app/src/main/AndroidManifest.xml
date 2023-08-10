@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.abhijeet.vitb">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -16,7 +17,15 @@
         android:theme="@style/Theme.VITB"
         tools:targetApi="31">
         <activity
-            android:name=".Underbelly"
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".home"
+            android:exported="false" /> <!-- Firebase configuration goes here -->
+        <!-- Make sure to include the google-services.json file in the app/ directory -->
+        <!-- Follow the Firebase setup steps mentioned earlier in this conversation -->
+        <activity
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".Mayuris"
@@ -37,7 +46,7 @@
             android:name=".web_view"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Underbelly"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
