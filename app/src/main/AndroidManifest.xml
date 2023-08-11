@@ -17,15 +17,7 @@
         android:theme="@style/Theme.VITB"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".home"
-            android:exported="false" /> <!-- Firebase configuration goes here -->
-        <!-- Make sure to include the google-services.json file in the app/ directory -->
-        <!-- Follow the Firebase setup steps mentioned earlier in this conversation -->
-        <activity
-            android:name=".MainActivity"
+            android:name=".Underbelly"
             android:exported="false" />
         <activity
             android:name=".Mayuris"
@@ -46,7 +38,7 @@
             android:name=".web_view"
             android:exported="false" />
         <activity
-            android:name=".Underbelly"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
