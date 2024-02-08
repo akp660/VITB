@@ -10,7 +10,8 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.5"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHeight_percent="0.6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,10 +21,9 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:fontFamily="@font/jua"
         android:text="@string/See_Your_Mess_Menu_On"
-        android:textSize="25dp"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="@string/The_Go"
         android:fontFamily="@font/jua"
-        android:textSize="25dp"
+        android:textSize="30dp"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -47,10 +47,15 @@
         android:paddingEnd="30dp"
         android:drawableEnd="@drawable/get_started_btn_arrow"
         android:paddingVertical="10dp"
+        android:fontFamily="@font/jua"
         android:text="Get Started     "
         android:textSize="25dp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:cornerRadius="12dp"
+        android:background="@drawable/get_started_btn_bgshape"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
