@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".get_started_screen">
 
     <ImageView
@@ -23,7 +24,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/jua"
         android:text="@string/See_Your_Mess_Menu_On"
+        android:shadowDy="15"
         android:textSize="30dp"
+        android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -34,28 +37,35 @@
         android:layout_height="wrap_content"
         android:text="@string/The_Go"
         android:fontFamily="@font/jua"
+        android:elevation="4dp"
+        android:shadowDy="15"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="30dp"
-        android:drawableEnd="@drawable/get_started_btn_arrow"
-        android:paddingVertical="10dp"
-        android:fontFamily="@font/jua"
-        android:text="Get Started     "
-        android:textSize="25dp"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:cornerRadius="12dp"
-        android:background="@drawable/get_started_btn_bgshape"
-        app:layout_constraintEnd_toEndOf="@+id/textView7"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="30dp"
+            android:drawableEnd="@drawable/get_started_btn_arrow"
+            android:paddingVertical="10dp"
+            android:fontFamily="@font/jua"
+            android:text="Get Started     "
+            android:textSize="25dp"
+            android:textAllCaps="false"
+            android:elevation="4dp"
+            android:shadowColor="#969699"
+            android:shadowDy="5"
+            android:shadowRadius="10"
+            android:textColor="@color/white"
+            app:cornerRadius="12dp"
+            android:background="@drawable/get_started_btn_bgshape"
+            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
