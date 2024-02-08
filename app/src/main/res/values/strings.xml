@@ -2,4 +2,6 @@
     <string name="app_name" translatable="false">Foody</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+        <string name="See_Your_Mess_Menu_On"><font color="black">See Your </font><font color="#4C48FF">Mess Menu </font><font color="black">On</font></string>
+    <string name="The_Go"><font color="black">The Go</font></string>
 </resources>
