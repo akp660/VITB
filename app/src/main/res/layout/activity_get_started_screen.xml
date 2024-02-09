@@ -25,7 +25,9 @@
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:elevation="4dp"
         android:fontFamily="@font/jua"
         android:shadowDy="15"
