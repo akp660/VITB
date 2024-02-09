@@ -51,29 +51,29 @@
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:paddingStart="40dp"
-            android:paddingEnd="30dp"
-            android:drawableEnd="@drawable/get_started_btn_arrow"
-            android:paddingVertical="10dp"
-            android:fontFamily="@font/jua"
-            android:text="Get Started     "
-            android:textSize="25dp"
-            android:textAllCaps="false"
-            android:elevation="4dp"
-            android:shadowColor="#969699"
-            android:shadowDy="5"
-            android:shadowRadius="10"
-            android:textColor="@color/white"
-            app:cornerRadius="10dp"
-            android:background="@drawable/get_started_btn_bgshape"
-            app:layout_constraintEnd_toEndOf="@+id/textView7"
-            app:layout_constraintStart_toStartOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/get_started_btn_bgshape"
+        android:drawableEnd="@drawable/get_started_btn_arrow"
+        android:elevation="4dp"
+        android:fontFamily="@font/jua"
+        android:paddingVertical="10dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="30dp"
+        android:shadowColor="#969699"
+        android:shadowDy="5"
+        android:shadowRadius="10"
+        android:text="Get Started     "
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
