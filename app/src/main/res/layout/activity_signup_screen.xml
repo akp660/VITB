@@ -24,7 +24,7 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="349dp"
+        android:layout_width="345sp"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:background="@drawable/continue_with_google_btn_bgshape"
@@ -37,10 +37,10 @@
         android:shadowColor="#969699"
         android:shadowDy="5"
         android:shadowRadius="10"
-        android:text="Continue with Google  "
+        android:text="Continue with Google"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="@+id/textView7"
