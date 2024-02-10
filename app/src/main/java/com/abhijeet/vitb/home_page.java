@@ -33,6 +33,8 @@ public class home_page extends AppCompatActivity {
         adapter.AddFragment(new Mess(), "Mess");
         adapter.AddFragment(new Mayuri(),"Mayuri's");
         adapter.AddFragment(new Underbely(), "Under Belly");
+        adapter.AddFragment(new NightCanteen(), "Night Canteen");
+        adapter.AddFragment(new Settings(), "Settings");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
