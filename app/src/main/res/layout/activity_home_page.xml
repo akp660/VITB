@@ -15,15 +15,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabBackground="@drawable/tab_indicator"
+        app:tabIndicatorHeight="35dp"
         app:tabGravity="fill"
-        app:tabIndicatorHeight="0dp"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorFullWidth="true"
         app:tabMode="scrollable"
         app:tabPaddingEnd="25dp"
         app:tabPaddingStart="25dp"
+        app:tabIndicatorColor="#4C48FF"
         app:tabSelectedTextColor="@color/white"
+        app:tabIndicator="@drawable/tab_background_selected"
         app:tabTextAppearance="@style/TabItemTextAppearance" />
 
     <androidx.viewpager.widget.ViewPager

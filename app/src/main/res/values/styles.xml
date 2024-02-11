@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="TabItemTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">23dp</item>
         <item name="fontWeight">800</item>
         <item name="textAllCaps">false</item>
         <item name="fontFamily">@font/jua</item>
