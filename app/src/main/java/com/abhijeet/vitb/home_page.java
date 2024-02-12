@@ -3,6 +3,7 @@ package com.abhijeet.vitb;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.trusted.sharing.ShareTarget;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -13,10 +14,22 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -26,6 +39,7 @@ public class home_page extends AppCompatActivity {
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
 //    MainAdapter adapter;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +71,35 @@ public class home_page extends AppCompatActivity {
 //            public void onTabReselected(TabLayout.Tab tab) {
 //            }
 //        });
+
+        RequestQueue requestQueue;
+        requestQueue = Volley.newRequestQueue(this);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                "http://api.weatherapi.com/v1/current.json?key=c4e0da1fd4a649efa83135247241202&q=23.07,76.85&aqi=no",
+                null,
+                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse() {
+//                        onResponse(null);
+//                    }
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.d("myapp", "The response is : "+response.getJSONObject("current").getDouble("temp_c"));
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("myapp", "something wrong ");
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
     }
 }
 
