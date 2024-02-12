@@ -1,26 +1,28 @@
 package com.abhijeet.vitb;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Mess#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
+import java.util.Calendar;
+
 public class Mess extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private TextView text;
+    private CardView calender;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -28,15 +30,6 @@ public class Mess extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Mess_fragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Mess newInstance(String param1, String param2) {
         Mess fragment = new Mess();
         Bundle args = new Bundle();
@@ -49,6 +42,7 @@ public class Mess extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -59,7 +53,40 @@ public class Mess extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mess, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_mess, container, false);
+
+        // Initialize views
+        text = rootView.findViewById(R.id.text);
+        calender = rootView.findViewById(R.id.calender);
+
+        // Set today's date in the text TextView by default
+        Calendar calendar = Calendar.getInstance();
+        int initialYear = calendar.get(Calendar.YEAR);
+        int initialMonth = calendar.get(Calendar.MONTH);
+        int initialDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        text.setText(String.valueOf(initialDayOfMonth));
+
+        // Set OnClickListener for the calender CardView
+        calender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create a DatePickerDialog
+                DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                                // Display only the day of the month in the text TextView
+                                text.setText(String.valueOf(dayOfMonth));
+                            }
+                        }, initialYear, initialMonth, initialDayOfMonth); // Set initial date to today's date
+
+                // Show the DatePickerDialog
+                datePickerDialog.show();
+            }
+        });
+
+        return rootView;
     }
+
 
 }

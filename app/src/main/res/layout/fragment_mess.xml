@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView8"
+                android:id="@+id/calender"
                 android:layout_width="35sp"
                 android:layout_height="35sp"
                 android:layout_marginStart="25dp"
@@ -54,6 +54,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="12"
