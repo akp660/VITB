@@ -98,18 +98,12 @@ public class Mess extends Fragment {
 
     private void showNameSelectionPopup() {
         // Array of names
-        final String[] names = {"CRCL", "Mayuri(BOYS)", "Foodex", "AB", "Mayuri(Girls)"};
-
-        // Index of default selected name
-        int defaultSelectionIndex = 0; // Default index is 0 for "CRCL"
-
-        // Set the selected name to textView initially
-        textView.setText(names[defaultSelectionIndex]);
+        final String[] names = {"C R C L", "Mayuri (Boys)", "Foodex", "AB", "Mayuri (Girls)"};
 
         // Create AlertDialog.Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Select a Name");
-        builder.setSingleChoiceItems(names, defaultSelectionIndex, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(names, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Set the selected name to textView
@@ -128,6 +122,7 @@ public class Mess extends Fragment {
         // Show the dialog
         builder.show();
     }
+
 
 
 }
