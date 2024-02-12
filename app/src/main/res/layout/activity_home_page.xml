@@ -23,6 +23,7 @@
         app:tabPaddingEnd="20dp"
         app:tabPaddingStart="20dp"
         app:tabIndicatorColor="#4C48FF"
+        app:tabRippleColor="@android:color/transparent"
         app:tabSelectedTextColor="@color/white"
         app:tabIndicator="@drawable/tab_background_selected"
         app:tabTextAppearance="@style/TabItemTextAppearance">
