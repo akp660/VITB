@@ -38,10 +38,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/calender"
                 android:layout_width="35sp"
                 android:layout_height="35sp"
+                app:strokeWidth="2sp"
+                app:strokeColor="#D84C48FF"
                 android:layout_marginStart="25dp"
                 app:cardCornerRadius="10sp"
                 app:cardElevation="15sp"
@@ -57,6 +59,7 @@
                         android:id="@+id/text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/jua"
                         android:textColor="?attr/actionMenuTextColor"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +69,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/mess_name"
