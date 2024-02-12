@@ -76,7 +76,7 @@ public class home_page extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                "http://api.weatherapi.com/v1/current.json?key=c4e0da1fd4a649efa83135247241202&q=23.07,76.85&aqi=no",
+                "http://api.weatherapi.com/v1/forecast.json?key=c4e0da1fd4a649efa83135247241202&q=Mumbai&days=1&aqi=no&alerts=no",
                 null,
                 new Response.Listener<JSONObject>() {
 //                    @Override
@@ -86,8 +86,15 @@ public class home_page extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
+//                        try {
+//                            Log.d("myapp", "The response is : "+response.getString("last_updated"));
+//                        } catch (JSONException e) {
+//                            throw new RuntimeException(e);
+//                        }
                         try {
-                            Log.d("myapp", "The response is : "+response.getJSONObject("current").getDouble("temp_c"));
+                            JSONObject currentObj = response.getJSONObject("location");
+                            String name = currentObj.getString("name");
+                            Log.d("myapp", "The temperature in Celsius is : " + name);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -95,7 +102,7 @@ public class home_page extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("myapp", "something wrong ");
+                Log.d("myapp", "wrong");
             }
         });
 
