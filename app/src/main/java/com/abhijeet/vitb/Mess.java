@@ -18,7 +18,6 @@ import java.util.Calendar;
 public class Mess extends Fragment {
 
     private TextView text;
-    private ImageView imageView;
     private TextView textView;
 
     private static final String ARG_PARAM1 = "param1";
@@ -55,7 +54,7 @@ public class Mess extends Fragment {
 
         // Initialize views
         text = rootView.findViewById(R.id.text);
-        imageView = rootView.findViewById(R.id.mess_selection);
+        ImageView imageView = rootView.findViewById(R.id.mess_selection);
         textView = rootView.findViewById(R.id.mess_name);
         CardView calender = rootView.findViewById(R.id.calender);
 
