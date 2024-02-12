@@ -28,7 +28,7 @@
             android:background="#ECECEC">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/mess_selection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="25dp"
@@ -69,11 +69,11 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/mess_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jua"
-                android:text="Foodex"
+                android:text=""
                 android:textColor="#252525"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/imageView"

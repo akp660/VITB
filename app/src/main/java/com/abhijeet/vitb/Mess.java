@@ -1,15 +1,15 @@
 package com.abhijeet.vitb;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -18,13 +18,11 @@ import java.util.Calendar;
 public class Mess extends Fragment {
 
     private TextView text;
-    private CardView calender;
+    private ImageView imageView;
+    private TextView textView;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
 
     public Mess() {
         // Required empty public constructor
@@ -44,8 +42,8 @@ public class Mess extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -57,7 +55,9 @@ public class Mess extends Fragment {
 
         // Initialize views
         text = rootView.findViewById(R.id.text);
-        calender = rootView.findViewById(R.id.calender);
+        imageView = rootView.findViewById(R.id.mess_selection);
+        textView = rootView.findViewById(R.id.mess_name);
+        CardView calender = rootView.findViewById(R.id.calender);
 
         // Set today's date in the text TextView by default
         Calendar calendar = Calendar.getInstance();
@@ -85,7 +85,49 @@ public class Mess extends Fragment {
             }
         });
 
+        // Set OnClickListener for the imageView
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show the popup with names
+                showNameSelectionPopup();
+            }
+        });
+
         return rootView;
+    }
+
+    private void showNameSelectionPopup() {
+        // Array of names
+        final String[] names = {"CRCL", "Mayuri(BOYS)", "Foodex", "AB", "Mayuri(Girls)"};
+
+        // Index of default selected name
+        int defaultSelectionIndex = 0; // Default index is 0 for "CRCL"
+
+        // Set the selected name to textView initially
+        textView.setText(names[defaultSelectionIndex]);
+
+        // Create AlertDialog.Builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Select a Name");
+        builder.setSingleChoiceItems(names, defaultSelectionIndex, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Set the selected name to textView
+                textView.setText(names[which]);
+            }
+        });
+
+        // Set positive button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing, just dismiss the dialog
+            }
+        });
+
+        // Show the dialog
+        builder.show();
     }
 
 
