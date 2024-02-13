@@ -1,26 +1,33 @@
 package com.abhijeet.vitb;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Settings#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.fragment.app.Fragment;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Settings extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -28,15 +35,6 @@ public class Settings extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Settings.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Settings newInstance(String param1, String param2) {
         Settings fragment = new Settings();
         Bundle args = new Bundle();
@@ -58,7 +56,45 @@ public class Settings extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        TextView myTextView = view.findViewById(R.id.textView21);
+        ImageView imageView = view.findViewById(R.id.imageView2);
+
+        RequestQueue requestQueue;
+        requestQueue = Volley.newRequestQueue(getContext());
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                "https://api.openweathermap.org/data/2.5/weather?lat=23.077428360226556&lon=76.85120708035352&appid=d9e0ccb1ddbc14dd33b4d765916ec92d",
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject currentObj = response.getJSONObject("main");
+                            int temp = currentObj.getInt("temp") - 275;
+                            String temp_c = temp+"°C";
+                            myTextView.setText(temp_c);
+
+                            JSONArray weatherArray = response.getJSONArray("weather");
+                            JSONObject weatherObject = weatherArray.getJSONObject(0);
+                            String icon = weatherObject.getString("icon");
+//                            Log.d("myapp", "The temperature in Celsius is : " + icon + "°C");
+                            Picasso.get().load("https://openweathermap.org/img/wn/"+icon+"@2x.png").into(imageView);
+//                            Log.d("myapp", "The temperature in Celsius is : " + temp + "°C");
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                myTextView.setText("25°C");
+                Log.d("myapp", "onErrorResponse: dance");
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+
+        return view;
     }
 }

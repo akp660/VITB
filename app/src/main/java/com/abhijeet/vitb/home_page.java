@@ -6,16 +6,9 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 public class home_page extends AppCompatActivity {
 
@@ -56,41 +49,7 @@ public class home_page extends AppCompatActivity {
 //            }
 //        });
 
-        RequestQueue requestQueue;
-        requestQueue = Volley.newRequestQueue(this);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                "http://api.weatherapi.com/v1/forecast.json?key=c4e0da1fd4a649efa83135247241202&q=Mumbai&days=1&aqi=no&alerts=no",
-                null,
-                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse() {
-//                        onResponse(null);
-//                    }
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-//                        try {
-//                            Log.d("myapp", "The response is : "+response.getString("last_updated"));
-//                        } catch (JSONException e) {
-//                            throw new RuntimeException(e);
-//                        }
-                        try {
-                            JSONObject currentObj = response.getJSONObject("location");
-                            String name = currentObj.getString("name");
-                            Log.d("myapp", "The temperature in Celsius is : " + name);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("myapp", "wrong");
-            }
-        });
-
-        requestQueue.add(jsonObjectRequest);
     }
 }
 
