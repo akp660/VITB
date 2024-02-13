@@ -17,7 +17,7 @@
         android:theme="@style/Theme.VITB"
         tools:targetApi="31">
         <activity
-            android:name=".home_page"
+            android:name=".get_started_screen"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".get_started_screen"
+            android:name=".home_page"
             android:exported="true"/>
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
