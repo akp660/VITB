@@ -73,8 +73,9 @@ public class Settings extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         ShimmerFrameLayout shimmerLayout = view.findViewById(R.id.shimmerLayout);
         CardView cardview = view.findViewById(R.id.cardView110);
-        TextView myTextView = view.findViewById(R.id.textView21);
+        TextView tempTextView = view.findViewById(R.id.textView21);
         ImageView imageView = view.findViewById(R.id.imageView2);
+        TextView icon_Desc = view.findViewById(R.id.textView23);
 
         long currentTimeMillis = System.currentTimeMillis();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
@@ -84,8 +85,10 @@ public class Settings extends Fragment {
 //            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
             String cachedTemperature = preferences.getString("cached_temperature", "25°C");
             String cachedIconUrl = preferences.getString("icon_id", "https://openweathermap.org/img/wn/03d@2x.png");
-            Log.d("icon_url", cachedIconUrl);
-            myTextView.setText(cachedTemperature);
+            String cachedIconDesc = preferences.getString("icon_desc", "scattered clouds");
+//            Log.d("icon_url", cachedIconUrl);
+            tempTextView.setText(cachedTemperature);
+            icon_Desc.setText(cachedIconDesc);
             Picasso.get().load(cachedIconUrl).into(imageView);
 
             shimmerLayout.stopShimmer();
@@ -110,11 +113,13 @@ public class Settings extends Fragment {
                                 Log.d("check", "json got response.");
                                 int temp = currentObj.getInt("temp") - 275;
                                 String temp_c = temp+"°C";
-                                myTextView.setText(temp_c);
+                                tempTextView.setText(temp_c);
 
                                 JSONArray weatherArray = response.getJSONArray("weather");
                                 JSONObject weatherObject = weatherArray.getJSONObject(0);
                                 String icon = weatherObject.getString("icon");
+                                String desc = weatherObject.getString("description");
+                                icon_Desc.setText(desc);
                                 String icon_url = "https://openweathermap.org/img/wn/"+icon+"@2x.png";
 
                                 Picasso.get().load("https://openweathermap.org/img/wn/"+icon+"@2x.png").into(imageView);
@@ -124,7 +129,7 @@ public class Settings extends Fragment {
                                 shimmerLayout.setVisibility(View.GONE);
                                 cardview.setVisibility(View.VISIBLE);
 
-                                saveDataToCache(temp_c,icon_url,currentTimeMillis);
+                                saveDataToCache(temp_c,desc,icon_url,currentTimeMillis);
 //                            Log.d("myapp", "The temperature in Celsius is : " + icon + "°C");
 
 //                            Log.d("myapp", "The temperature in Celsius is : " + temp + "°C");
@@ -135,7 +140,9 @@ public class Settings extends Fragment {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    myTextView.setText("25°C");
+                    tempTextView.setText("25°C");
+                    icon_Desc.setText("scattered clouds");
+                    Picasso.get().load("https://openweathermap.org/img/wn/03d@2x.png").into(imageView);
                     isJsonResponseReceived = true;
                     shimmerLayout.stopShimmer();
                     shimmerLayout.setVisibility(View.GONE);
@@ -150,12 +157,13 @@ public class Settings extends Fragment {
         return view;
     }
 
-    private void saveDataToCache(String curr_t, String icon_id,long currentTimeMillis) {
+    private void saveDataToCache(String curr_t,String desc, String icon_id,long currentTimeMillis) {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         SharedPreferences.Editor editor = preferences.edit();
         
         editor.putString("cached_temperature", curr_t);
+        editor.putString("icon_desc", desc);
         editor.putString("icon_id", icon_id);
         editor.putLong("last_api_call_timestamp", currentTimeMillis);
 
