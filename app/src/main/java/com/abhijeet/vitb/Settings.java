@@ -83,7 +83,7 @@ public class Settings extends Fragment {
         if (currentTimeMillis - lastApiCallTimestamp < TWO_HOURS_IN_MILLIS) {
 //            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
             String cachedTemperature = preferences.getString("cached_temperature", "25°C");
-            String cachedIconUrl = preferences.getString("cached_icon_url", "https://openweathermap.org/img/wn/03d@2x.png");
+            String cachedIconUrl = preferences.getString("icon_id", "https://openweathermap.org/img/wn/03d@2x.png");
             Log.d("icon_url", cachedIconUrl);
             myTextView.setText(cachedTemperature);
             Picasso.get().load(cachedIconUrl).into(imageView);
