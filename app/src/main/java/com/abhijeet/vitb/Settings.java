@@ -43,7 +43,7 @@ public class Settings extends Fragment {
 
     private static final long TWO_HOURS_IN_MILLIS = 2 * 60 * 60 * 1000;
 
-    private long lastApiCallTimestamp = 0;
+//    private long lastApiCallTimestamp = 0;
 
     public Settings() {
         // Required empty public constructor
@@ -77,15 +77,20 @@ public class Settings extends Fragment {
         ImageView imageView = view.findViewById(R.id.imageView2);
 
         long currentTimeMillis = System.currentTimeMillis();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        long lastApiCallTimestamp = preferences.getLong("last_api_call_timestamp", 0);
 
         if (currentTimeMillis - lastApiCallTimestamp < TWO_HOURS_IN_MILLIS) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+//            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
             String cachedTemperature = preferences.getString("cached_temperature", "25°C");
-            String cachedIconUrl = preferences.getString("cached_icon_url", "");
+            String cachedIconUrl = preferences.getString("cached_icon_url", "https://openweathermap.org/img/wn/03d@2x.png");
+            Log.d("icon_url", cachedIconUrl);
             myTextView.setText(cachedTemperature);
-            if (!cachedIconUrl.isEmpty()) {
-                Picasso.get().load(cachedIconUrl).into(imageView);
-            }
+            Picasso.get().load(cachedIconUrl).into(imageView);
+
+            shimmerLayout.stopShimmer();
+            shimmerLayout.setVisibility(View.GONE);
+            cardview.setVisibility(View.VISIBLE);
         }
 
         else {
@@ -111,6 +116,7 @@ public class Settings extends Fragment {
                                 JSONObject weatherObject = weatherArray.getJSONObject(0);
                                 String icon = weatherObject.getString("icon");
                                 String icon_url = "https://openweathermap.org/img/wn/"+icon+"@2x.png";
+
                                 Picasso.get().load("https://openweathermap.org/img/wn/"+icon+"@2x.png").into(imageView);
 
                                 isJsonResponseReceived = true;
@@ -118,7 +124,7 @@ public class Settings extends Fragment {
                                 shimmerLayout.setVisibility(View.GONE);
                                 cardview.setVisibility(View.VISIBLE);
 
-                                saveDataToCache(temp_c,icon_url);
+                                saveDataToCache(temp_c,icon_url,currentTimeMillis);
 //                            Log.d("myapp", "The temperature in Celsius is : " + icon + "°C");
 
 //                            Log.d("myapp", "The temperature in Celsius is : " + temp + "°C");
@@ -144,13 +150,14 @@ public class Settings extends Fragment {
         return view;
     }
 
-    private void saveDataToCache(String curr_t, String icon_id) {
+    private void saveDataToCache(String curr_t, String icon_id,long currentTimeMillis) {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         SharedPreferences.Editor editor = preferences.edit();
         
         editor.putString("cached_temperature", curr_t);
         editor.putString("icon_id", icon_id);
+        editor.putLong("last_api_call_timestamp", currentTimeMillis);
 
         editor.apply();
     }
