@@ -32,5 +32,6 @@ public class get_started_screen extends AppCompatActivity {
         if (vibrator != null) {
             vibrator.vibrate(VibrationEffect.createOneShot(60, VibrationEffect.DEFAULT_AMPLITUDE));
         }
+
     }
 }
