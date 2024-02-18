@@ -75,7 +75,7 @@ public class Settings extends Fragment {
         CardView cardview = view.findViewById(R.id.cardView110);
         TextView tempTextView = view.findViewById(R.id.textView21);
         ImageView imageView = view.findViewById(R.id.imageView2);
-        TextView icon_Desc = view.findViewById(R.id.textView23);
+        TextView icon_Desc = view.findViewById(R.id.textView121);
 
         long currentTimeMillis = System.currentTimeMillis();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
