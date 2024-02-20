@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:background="@color/light2">
+                android:background="@color/light1">
 
                 <TextView
                     android:id="@+id/textView12"
@@ -56,7 +56,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/continue_with_google_btn_bgshape" >
+                        android:background="@color/light3" >
 
                         <TextView
                             android:id="@+id/textView20"
@@ -131,7 +131,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/get_started_btn_bgshape" >
+                        android:background="@color/light2" >
 
                         <TextView
                             android:id="@+id/textView120"
@@ -217,7 +217,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/get_started_btn_bgshape">
+                        android:background="@color/light3">
 
                         <TextView
                             android:id="@+id/textView15"
@@ -290,13 +290,11 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/get_started_btn_bgshape">
+                        android:background="@color/light3">
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cardView8"
                             android:layout_width="match_parent"
-                            app:strokeWidth="2sp"
-                            app:strokeColor="#D5DFFF"
                             android:layout_height="50sp"
                             android:layout_marginStart="50dp"
                             android:layout_marginTop="40dp"
@@ -305,12 +303,14 @@
                             app:cardElevation="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:strokeColor="@color/light4"
+                            app:strokeWidth="2sp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#9E90A7FA">
+                                android:background="@color/light2">
 
                                 <TextView
                                     android:id="@+id/textView11"
@@ -345,18 +345,18 @@
                             android:layout_marginTop="20dp"
                             android:layout_marginEnd="50dp"
                             app:cardCornerRadius="12sp"
-                            app:strokeWidth="2sp"
-                            app:strokeColor="#D5DFFF"
                             app:cardElevation="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/cardView8">
+                            app:layout_constraintTop_toBottomOf="@+id/cardView8"
+                            app:strokeColor="@color/light4"
+                            app:strokeWidth="2sp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#9E90A7FA">
+                                android:background="@color/light2">
 
                                 <TextView
                                     android:id="@+id/textView17"
@@ -404,18 +404,18 @@
                             android:layout_marginEnd="50dp"
                             android:layout_marginBottom="40dp"
                             app:cardCornerRadius="12sp"
-                            app:strokeWidth="2sp"
-                            app:strokeColor="#D5DFFF"
                             app:cardElevation="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView18">
+                            app:layout_constraintTop_toBottomOf="@+id/textView18"
+                            app:strokeColor="@color/light4"
+                            app:strokeWidth="2sp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#9E90A7FA">
+                                android:background="@color/light2">
 
                                 <TextView
                                     android:id="@+id/textView19"
