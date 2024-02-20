@@ -13,57 +13,58 @@
         android:layout_height="35dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
+        android:background="@color/light1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorHeight="35dp"
         app:tabGravity="fill"
+        app:tabIndicator="@drawable/tab_background_selected"
         app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorColor="@color/light4"
         app:tabIndicatorFullWidth="true"
+        app:tabIndicatorHeight="35dp"
         app:tabMode="scrollable"
         app:tabPaddingEnd="20dp"
         app:tabPaddingStart="20dp"
-        app:tabIndicatorColor="@color/light4"
-        android:background="@color/light1"
         app:tabRippleColor="@android:color/transparent"
         app:tabSelectedTextColor="@color/white"
-        app:tabIndicator="@drawable/tab_background_selected"
-        app:tabTextAppearance="@style/TabItemTextAppearance">
-
-    <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Mess"/>
+        app:tabTextAppearance="@style/TabItemTextAppearance"
+        app:tabTextColor="#1C1C1C">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Mess"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Mayuri's"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Mayuri's"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Under Belly"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Under Belly"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Night Canteen"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Night Canteen"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Settings"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </com.google.android.material.tabs.TabLayout>
 
