@@ -25,7 +25,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ECECEC">
+            android:background="@color/light2">
 
             <ImageView
                 android:id="@+id/mess_selection"
@@ -54,7 +54,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#B1B1B1">
+                    android:background="@color/light3">
 
                     <TextView
                         android:id="@+id/text"
@@ -111,7 +111,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#B1B1B1">
+                    android:background="@color/light3">
 
                     <ImageView
                         android:layout_width="match_parent"

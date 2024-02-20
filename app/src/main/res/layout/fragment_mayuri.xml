@@ -24,7 +24,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ECECEC">
+            android:background="@color/light2">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView6"
@@ -44,9 +44,9 @@
                         android:id="@+id/searchView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:iconifiedByDefault="false"
-                        android:background="#B1B1B1"
+                        android:background="@color/light3"
                         android:elevation="12dp"
+                        android:iconifiedByDefault="false"
                         android:queryHint="Search Food Item"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -74,16 +74,16 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_marginEnd="10dp"
-                app:cardElevation="12sp"
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="500sp"
+                app:cardElevation="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#B1B1B1">
+                    android:background="@color/light3">
 
                     <ImageView
                         android:id="@+id/refresh_button"

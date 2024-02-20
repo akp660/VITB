@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
-    private List<Underbelly.FoodItem> foodItemList;
+    private final List<Underbelly.FoodItem> foodItemList;
 
     public FoodAdapter(List<Underbelly.FoodItem> foodItemList) {
         this.foodItemList = foodItemList;

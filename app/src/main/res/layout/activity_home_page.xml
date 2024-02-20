@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home_page"
-    android:background="#FFFFFF">
+    android:background="@color/light1">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
@@ -23,8 +23,8 @@
         app:tabMode="scrollable"
         app:tabPaddingEnd="20dp"
         app:tabPaddingStart="20dp"
-        app:tabIndicatorColor="#4C48FF"
-        android:background="#FFFFFF"
+        app:tabIndicatorColor="@color/light4"
+        android:background="@color/light1"
         app:tabRippleColor="@android:color/transparent"
         app:tabSelectedTextColor="@color/white"
         app:tabIndicator="@drawable/tab_background_selected"
