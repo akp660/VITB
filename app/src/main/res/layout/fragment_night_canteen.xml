@@ -86,6 +86,7 @@
                     android:background="@color/light3">
 
                     <ImageView
+                        android:id="@+id/refresh_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
