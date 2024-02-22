@@ -190,6 +190,7 @@
                             android:id="@+id/textView121"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="20sp"
                             android:background="#E6ECFF"
                             android:text=""
                             android:layout_marginTop="5dp"
@@ -197,7 +198,7 @@
                             android:textSize="24dp"
                             android:fontFamily="@font/jua"
                             app:layout_constraintTop_toBottomOf="@id/imageView12"
-                            app:layout_constraintEnd_toEndOf="@id/imageView12"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="@id/imageView12"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -209,10 +210,10 @@
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/jua"
                     android:textColor="@color/black"
-                    android:text="App Default Seating"
+                    android:text="App Default Settings"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -281,7 +282,7 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/jua"
                     android:textColor="@color/black"
                     android:text="Account Setting"
@@ -299,7 +300,6 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="30dp"
                     app:cardCornerRadius="15sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView14">
