@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,12 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
@@ -64,6 +71,30 @@ public class Mess extends Fragment {
         int initialMonth = calendar.get(Calendar.MONTH);
         int initialDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         text.setText(String.valueOf(initialDayOfMonth));
+
+
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.child("Mess").child("CRCL").child("Mon").child("Breakfast")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+
+
 
         // Set OnClickListener for the calender CardView
         calender.setOnClickListener(new View.OnClickListener() {
