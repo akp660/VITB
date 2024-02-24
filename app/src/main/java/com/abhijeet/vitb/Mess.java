@@ -27,7 +27,7 @@ import java.util.Calendar;
 public class Mess extends Fragment {
 
     private TextView text;
-    private TextView textView;
+    private TextView textView, breakfastVeg;
 
     public String messName;
     public String day;
@@ -66,6 +66,7 @@ public class Mess extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_mess, container, false);
 
         // Initialize views
+        breakfastVeg = rootView.findViewById(R.id.breakfastVeg);
         text = rootView.findViewById(R.id.text);
         ImageView imageView = rootView.findViewById(R.id.mess_selection);
         textView = rootView.findViewById(R.id.mess_name);
@@ -143,6 +144,7 @@ public class Mess extends Fragment {
                         // whenever data at this location is updated.
                         String value = dataSnapshot.getValue(String.class);
                         Log.d("my1log", "Value is: " + value);
+                        breakfastVeg.setText(value);
                     }
 
                     @Override
