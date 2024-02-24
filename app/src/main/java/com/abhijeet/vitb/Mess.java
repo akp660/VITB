@@ -3,7 +3,9 @@ package com.abhijeet.vitb;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,10 @@ public class Mess extends Fragment {
 
     private TextView text;
     private TextView textView;
+
+    public String messName;
+    public String day;
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -72,11 +78,64 @@ public class Mess extends Fragment {
         int initialDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         text.setText(String.valueOf(initialDayOfMonth));
 
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        day = getDayOfWeekString(dayOfWeek);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        messName = preferences.getString("messName","");
+
+        if (messName==""){
+            //animation pointing select a mess.
+        }
+        else{
+            textView.setText(messName);
+            MessMenuRetrieval(messName,day);
+        }
 
 
+        // Set OnClickListener for the calender CardView
+        calender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create a DatePickerDialog
+                DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.set(year, month, dayOfMonth);
+
+                                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                                String day1 = getDayOfWeekString(dayOfWeek);
+                                day = day1;
+                                text.setText(String.valueOf(dayOfMonth));
+                                MessMenuRetrieval(messName,day);
+                            }
+                        }, initialYear, initialMonth, initialDayOfMonth);
+
+                // Show the DatePickerDialog
+                datePickerDialog.show();
+            }
+        });
+
+
+        // Set OnClickListener for the imageView
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show the popup with names
+                showNameSelectionPopup(day);
+            }
+        });
+
+        return rootView;
+
+    }
+
+    public void MessMenuRetrieval(String messName ,String day){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase.child("Mess").child("CRCL").child("Mon").child("Breakfast")
+        mDatabase.child("Mess").child(messName).child(day).child("Breakfast")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -92,44 +151,11 @@ public class Mess extends Fragment {
                         Log.w("my1log", "Failed to read value.", error.toException());
                     }
                 });
-
-
-
-
-        // Set OnClickListener for the calender CardView
-        calender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create a DatePickerDialog
-                DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-                                // Display only the day of the month in the text TextView
-                                text.setText(String.valueOf(dayOfMonth));
-                            }
-                        }, initialYear, initialMonth, initialDayOfMonth); // Set initial date to today's date
-
-                // Show the DatePickerDialog
-                datePickerDialog.show();
-            }
-        });
-
-        // Set OnClickListener for the imageView
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Show the popup with names
-                showNameSelectionPopup();
-            }
-        });
-
-        return rootView;
     }
-
-    private void showNameSelectionPopup() {
+    public void showNameSelectionPopup(String day) {
         // Array of names
-        final String[] names = {"C R C L", "Mayuri (Boys)", "Foodex", "AB", "Mayuri (Girls)"};
+
+        final String[] names = {"CRCL", "Mayuri (Boys)", "Foodex", "AB", "Mayuri (Girls)"};
 
         // Create AlertDialog.Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -138,8 +164,13 @@ public class Mess extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Set the selected name to textView
-                textView.setText(names[which]);
+                String Name = names[which];
+                messName = Name;
+                textView.setText(Name);
+
+                MessMenuRetrieval(messName, day);
             }
+
         });
 
         // Set positive button
@@ -152,8 +183,29 @@ public class Mess extends Fragment {
 
         // Show the dialog
         builder.show();
+
     }
 
 
+    private String getDayOfWeekString(int dayOfWeek) {
+        switch (dayOfWeek) {
+            case Calendar.SUNDAY:
+                return "Sun";
+            case Calendar.MONDAY:
+                return "Mon";
+            case Calendar.TUESDAY:
+                return "Tues";
+            case Calendar.WEDNESDAY:
+                return "Wed";
+            case Calendar.THURSDAY:
+                return "Thurs";
+            case Calendar.FRIDAY:
+                return "Fri";
+            case Calendar.SATURDAY:
+                return "Sat";
+            default:
+                return "";
+        }
+    }
 
 }
