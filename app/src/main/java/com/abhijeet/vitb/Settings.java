@@ -1,5 +1,7 @@
 package com.abhijeet.vitb;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -76,6 +78,15 @@ public class Settings extends Fragment {
         TextView tempTextView = view.findViewById(R.id.textView21);
         ImageView imageView = view.findViewById(R.id.imageView2);
         TextView icon_Desc = view.findViewById(R.id.textView23);
+
+        ImageView defaultMessAdd = view.findViewById(R.id.imageView5);
+        defaultMessAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show the popup with names
+                showNameSelectionPopup();
+            }
+        });
 
         long currentTimeMillis = System.currentTimeMillis();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
@@ -168,6 +179,39 @@ public class Settings extends Fragment {
         editor.putLong("last_api_call_timestamp", currentTimeMillis);
 
         editor.apply();
+    }
+
+    public void showNameSelectionPopup() {
+        // Array of names
+        final String[] names = {"CRCL", "Mayuri (Boys)", "Foodex", "AB", "Mayuri (Girls)"};
+
+        // Create AlertDialog.Builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Select a Name");
+        builder.setSingleChoiceItems(names, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Set the selected name to textView
+                String messName = names[which];
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+                SharedPreferences.Editor editor = preferences.edit();
+
+                editor.putString("messName", messName);
+
+                editor.apply();
+            }
+        });
+
+        // Set positive button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing, just dismiss the dialog
+            }
+        });
+
+        // Show the dialog
+        builder.show();
     }
 
 }

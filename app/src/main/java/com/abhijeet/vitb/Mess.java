@@ -3,7 +3,9 @@ package com.abhijeet.vitb;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +27,11 @@ import java.util.Calendar;
 public class Mess extends Fragment {
 
     private TextView text;
-    private TextView textView;
+    private TextView textView, breakfastVeg;
+
+    public String messName;
+    public String day;
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -60,6 +66,7 @@ public class Mess extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_mess, container, false);
 
         // Initialize views
+        breakfastVeg = rootView.findViewById(R.id.breakfastVeg);
         text = rootView.findViewById(R.id.text);
         ImageView imageView = rootView.findViewById(R.id.mess_selection);
         textView = rootView.findViewById(R.id.mess_name);
@@ -72,28 +79,19 @@ public class Mess extends Fragment {
         int initialDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         text.setText(String.valueOf(initialDayOfMonth));
 
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        day = getDayOfWeekString(dayOfWeek);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        messName = preferences.getString("messName","");
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        mDatabase.child("Mess").child("CRCL").child("Mon").child("Breakfast")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        String value = dataSnapshot.getValue(String.class);
-                        Log.d("my1log", "Value is: " + value);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w("my1log", "Failed to read value.", error.toException());
-                    }
-                });
-
-
+        if (messName==""){
+            //animation pointing select a mess.
+        }
+        else{
+            textView.setText(messName);
+            MessMenuRetrieval(messName,day);
+        }
 
 
         // Set OnClickListener for the calender CardView
@@ -105,31 +103,61 @@ public class Mess extends Fragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-                                // Display only the day of the month in the text TextView
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.set(year, month, dayOfMonth);
+
+                                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                                String day1 = getDayOfWeekString(dayOfWeek);
+                                day = day1;
                                 text.setText(String.valueOf(dayOfMonth));
+                                MessMenuRetrieval(messName,day);
                             }
-                        }, initialYear, initialMonth, initialDayOfMonth); // Set initial date to today's date
+                        }, initialYear, initialMonth, initialDayOfMonth);
 
                 // Show the DatePickerDialog
                 datePickerDialog.show();
             }
         });
 
+
         // Set OnClickListener for the imageView
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Show the popup with names
-                showNameSelectionPopup();
+                showNameSelectionPopup(day);
             }
         });
 
         return rootView;
+
     }
 
-    private void showNameSelectionPopup() {
+    public void MessMenuRetrieval(String messName ,String day){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.child("Mess").child(messName).child(day).child("Breakfast")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        breakfastVeg.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+    }
+    public void showNameSelectionPopup(String day) {
         // Array of names
-        final String[] names = {"C R C L", "Mayuri (Boys)", "Foodex", "AB", "Mayuri (Girls)"};
+
+        final String[] names = {"CRCL", "Mayuri (Boys)", "Foodex", "AB", "Mayuri (Girls)"};
 
         // Create AlertDialog.Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -138,8 +166,13 @@ public class Mess extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Set the selected name to textView
-                textView.setText(names[which]);
+                String Name = names[which];
+                messName = Name;
+                textView.setText(Name);
+
+                MessMenuRetrieval(messName, day);
             }
+
         });
 
         // Set positive button
@@ -152,8 +185,29 @@ public class Mess extends Fragment {
 
         // Show the dialog
         builder.show();
+
     }
 
 
+    private String getDayOfWeekString(int dayOfWeek) {
+        switch (dayOfWeek) {
+            case Calendar.SUNDAY:
+                return "Sun";
+            case Calendar.MONDAY:
+                return "Mon";
+            case Calendar.TUESDAY:
+                return "Tues";
+            case Calendar.WEDNESDAY:
+                return "Wed";
+            case Calendar.THURSDAY:
+                return "Thurs";
+            case Calendar.FRIDAY:
+                return "Fri";
+            case Calendar.SATURDAY:
+                return "Sat";
+            default:
+                return "";
+        }
+    }
 
 }
