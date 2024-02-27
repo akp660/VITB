@@ -23,11 +23,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class Mess extends Fragment {
 
     private TextView text;
-    private TextView textView, breakfastVeg;
+    private TextView textView, breakfastVeg, breakfastNonVeg, lunchVeg, lunchNonVeg, lunchSides, snacks;
 
     public String messName;
     public String day;
@@ -67,6 +68,12 @@ public class Mess extends Fragment {
 
         // Initialize views
         breakfastVeg = rootView.findViewById(R.id.breakfastVeg);
+        breakfastNonVeg = rootView.findViewById(R.id.breakfastNonVeg);
+        lunchVeg = rootView.findViewById(R.id.lunchVeg);
+        lunchNonVeg = rootView.findViewById(R.id.lunchNonVeg);
+        lunchSides = rootView.findViewById(R.id.lunchSides);
+        snacks = rootView.findViewById(R.id.snacksVeg);
+
         text = rootView.findViewById(R.id.text);
         ImageView imageView = rootView.findViewById(R.id.mess_selection);
         textView = rootView.findViewById(R.id.mess_name);
@@ -153,7 +160,106 @@ public class Mess extends Fragment {
                         Log.w("my1log", "Failed to read value.", error.toException());
                     }
                 });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Breakfast").child("NonVeg")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+
+                        if (Objects.equals(value, "NIL")){
+                            breakfastNonVeg.setVisibility(View.INVISIBLE);
+                        }
+                        else{
+                            breakfastNonVeg.setVisibility(View.VISIBLE);
+                            breakfastNonVeg.setText(value);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Lunch").child("Veg")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        lunchVeg.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Lunch").child("NonVeg")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        lunchNonVeg.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Lunch").child("Sides")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        lunchSides.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Snacks").child("Veg")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        snacks.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
     }
+
     public void showNameSelectionPopup(String day) {
         // Array of names
 

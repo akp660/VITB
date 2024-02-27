@@ -99,6 +99,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/refresh_button"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_marginEnd="10dp"
@@ -130,186 +131,508 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:layout_marginHorizontal="15dp"
-                app:cardCornerRadius="10dp"
-                android:elevation="4dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView">
+                android:layout_marginBottom="25dp"
+                app:layout_constraintTop_toBottomOf="@id/imageView"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/light3">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/Breakfast"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/jua"
-                        android:layout_marginTop="10dp"
-                        android:textSize="20dp"
-                        android:textColor="@color/black"
-                        android:text="BreakFast Menu"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-
-                    <ImageView
-                        android:id="@+id/breakFastExtrasIcon1"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="20dp"
-                        android:src="@drawable/toast"
-                        app:layout_constraintTop_toTopOf="@id/breakFastExtrasIcon2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="@id/breakFastExtrasIcon2"/>
-                    <ImageView
-                        android:id="@+id/breakFastExtrasIcon2"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/hot_beverage"
-                        app:layout_constraintTop_toTopOf="@id/breakfastExtras"
-                        app:layout_constraintStart_toEndOf="@id/breakFastExtrasIcon1"
-                        app:layout_constraintBottom_toBottomOf="@id/breakfastExtras"/>
-
-                    <TextView
-                        android:id="@+id/breakfastExtras"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/breakfastCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="70dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:fontFamily="@font/jua"
-                        android:lineBreakStyle="strict"
-                        android:paddingHorizontal="5dp"
-                        android:paddingVertical="10dp"
-                        android:text="Bread Butter/Jam\nMilk/Tea/Coffee"
-                        android:textColor="@color/black"
-                        app:flow_maxElementsWrap="3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/Breakfast" />
-
-                    <ImageView
-                        android:id="@+id/breakFastFruitsIcon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/fruits"
-                        app:layout_constraintTop_toTopOf="@id/breakfastFruits"
-                        app:layout_constraintStart_toStartOf="@id/breakFastExtrasIcon1"
-                        app:layout_constraintEnd_toEndOf="@id/breakFastExtrasIcon2"
-                        app:layout_constraintBottom_toBottomOf="@id/breakfastFruits"/>
-
-                    <TextView
-                        android:id="@+id/breakfastFruits"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="70dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:fontFamily="@font/jua"
-                        android:lineBreakStyle="strict"
-                        android:paddingHorizontal="5dp"
-                        android:paddingVertical="10dp"
-                        android:text="Banana / Fruit Salad"
-                        android:textColor="@color/black"
-                        app:flow_maxElementsWrap="3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/breakfastExtras" />
-
-                    <View
-                        android:id="@+id/divider1"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
                         android:layout_marginHorizontal="15dp"
-                        android:background="@drawable/horizontal_divider_gradient"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:cardCornerRadius="10dp"
+                        android:elevation="4dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/breakfastFruits" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/breakFastVegIcon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/veg_icon"
-                        app:layout_constraintTop_toTopOf="@id/breakfastVeg"
-                        app:layout_constraintStart_toStartOf="@id/breakFastFruitsIcon"
-                        app:layout_constraintEnd_toEndOf="@id/breakFastFruitsIcon"
-                        app:layout_constraintBottom_toBottomOf="@id/breakfastVeg"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/light3">
 
-                    <TextView
-                        android:id="@+id/breakfastVeg"
+                            <TextView
+                                android:id="@+id/Breakfast"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/jua"
+                                android:layout_marginTop="10dp"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:text="BreakFast Menu"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                            <ImageView
+                                android:id="@+id/breakFastExtrasIcon1"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"
+                                android:src="@drawable/toast"
+                                app:layout_constraintTop_toTopOf="@id/breakfastExtras"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="@id/breakfastExtras"/>
+
+                            <TextView
+                                android:id="@+id/breakfastExtras"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="5dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:textColor="@color/black"
+                                android:text="Bread Butter/Jam"
+                                app:flow_maxElementsWrap="3"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                app:layout_constraintStart_toEndOf="@id/breakFastExtrasIcon2"
+                                app:layout_constraintTop_toBottomOf="@id/Breakfast" />
+
+                            <ImageView
+                                android:id="@+id/breakFastExtrasIcon2"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/hot_beverage"
+                                app:layout_constraintTop_toTopOf="@id/breakfastExtras2"
+                                app:layout_constraintStart_toStartOf="@id/breakFastExtrasIcon1"
+                                app:layout_constraintEnd_toEndOf="@id/breakFastExtrasIcon1"
+                                app:layout_constraintBottom_toBottomOf="@id/breakfastExtras2"/>
+
+                            <TextView
+                                android:id="@+id/breakfastExtras2"
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="10dp"
+                                android:layout_marginTop="5dp"
+                                android:paddingHorizontal="5dp"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:textColor="@color/black"
+                                android:text="Milk/Tea/Coffee"
+                                app:flow_maxElementsWrap="3"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                app:layout_constraintStart_toEndOf="@id/breakFastExtrasIcon2"
+                                app:layout_constraintTop_toBottomOf="@id/breakfastExtras" />
+
+                            <View
+                                android:id="@+id/divider3"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/breakfastExtras2" />
+
+                            <ImageView
+                                android:id="@+id/breakFastFruitsIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/fruits"
+                                app:layout_constraintTop_toTopOf="@id/breakfastFruits"
+                                app:layout_constraintStart_toStartOf="@id/breakFastExtrasIcon1"
+                                app:layout_constraintEnd_toEndOf="@id/breakFastExtrasIcon2"
+                                app:layout_constraintBottom_toBottomOf="@id/breakfastFruits"/>
+
+                            <TextView
+                                android:id="@+id/breakfastFruits"
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:textColor="@color/black"
+                                app:flow_maxElementsWrap="3"
+                                android:text="Banana / Fruit Salad"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                app:layout_constraintStart_toEndOf="@id/breakFastFruitsIcon"
+                                app:layout_constraintTop_toBottomOf="@id/breakfastExtras2" />
+
+                            <View
+                                android:id="@+id/divider1"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/breakfastFruits" />
+
+                            <ImageView
+                                android:id="@+id/breakFastVegIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/veg_icon"
+                                app:layout_constraintTop_toTopOf="@id/breakfastVeg"
+                                app:layout_constraintStart_toStartOf="@id/breakFastFruitsIcon"
+                                app:layout_constraintEnd_toEndOf="@id/breakFastFruitsIcon"
+                                app:layout_constraintBottom_toBottomOf="@id/breakfastVeg"/>
+
+                            <TextView
+                                android:id="@+id/breakfastVeg"
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="5dp"
+                                android:layout_marginTop="5dp"
+                                android:paddingEnd="20dp"
+                                android:fontFamily="@font/jua"
+                                android:inputType="textMultiLine"
+                                android:textColor="@color/black"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                app:layout_constraintStart_toEndOf="@id/breakFastVegIcon"
+                                app:layout_constraintTop_toBottomOf="@id/breakfastFruits" />
+
+                            <View
+                                android:id="@+id/divider2"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/breakfastExtras" />
+
+                            <ImageView
+                                android:id="@+id/breakFastNonVegIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/nonveg_icon"
+                                app:layout_constraintBottom_toBottomOf="@id/breakfastNonVeg"
+                                app:layout_constraintEnd_toEndOf="@+id/breakFastVegIcon"
+                                app:layout_constraintStart_toStartOf="@id/breakFastVegIcon"
+                                app:layout_constraintTop_toTopOf="@id/breakfastNonVeg" />
+
+                            <TextView
+                                android:id="@+id/breakfastNonVeg"
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="5dp"
+                                android:fontFamily="@font/jua"
+                                android:layout_marginTop="5dp"
+                                android:lineBreakStyle="strict"
+                                android:textColor="@color/black"
+                                app:flow_maxElementsWrap="3"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                app:layout_constraintStart_toEndOf="@id/breakFastNonVegIcon"
+                                app:layout_constraintTop_toBottomOf="@id/breakfastVeg" />
+
+                            <View
+                                android:id="@+id/divider"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/breakfastVeg" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/lunchCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="70dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:fontFamily="@font/jua"
-                        android:inputType="textMultiLine"
-                        android:paddingHorizontal="5dp"
-                        android:paddingVertical="10dp"
-                        android:textColor="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/breakfastFruits" />
-
-                    <View
-                        android:id="@+id/divider2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
                         android:layout_marginHorizontal="15dp"
-                        android:background="@drawable/horizontal_divider_gradient"
+                        android:layout_marginTop="35dp"
+                        android:elevation="4dp"
+                        app:cardCornerRadius="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/breakfastExtras" />
+                        app:layout_constraintTop_toBottomOf="@id/breakfastCard">
 
-                    <ImageView
-                        android:id="@+id/breakFastNonVegIcon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/nonveg_icon"
-                        app:layout_constraintBottom_toBottomOf="@id/breakfastNonVeg"
-                        app:layout_constraintEnd_toEndOf="@+id/breakFastVegIcon"
-                        app:layout_constraintStart_toStartOf="@id/breakFastVegIcon"
-                        app:layout_constraintTop_toTopOf="@id/breakfastNonVeg" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/light3">
 
-                    <TextView
-                        android:id="@+id/breakfastNonVeg"
+
+                            <TextView
+                                android:id="@+id/Lunch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/jua"
+                                android:text="Lunch Menu"
+                                android:textColor="@color/black"
+                                android:textSize="20dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/lunchStaplesIcon"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="20dp"
+                                android:src="@drawable/staples"
+                                app:layout_constraintBottom_toBottomOf="@id/lunchStaples"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/lunchStaples" />
+
+                            <TextView
+                                android:id="@+id/lunchStaples"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:paddingHorizontal="5dp"
+                                android:paddingVertical="10dp"
+                                android:text="Rice, Roti, Pickle"
+                                android:textColor="@color/black"
+                                app:flow_maxElementsWrap="3"
+                                app:layout_constraintStart_toEndOf="@id/lunchStaplesIcon"
+                                app:layout_constraintTop_toBottomOf="@id/Lunch" />
+
+                            <View
+                                android:id="@+id/divider4"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/lunchStaples" />
+
+                            <ImageView
+                                android:id="@+id/lunchVegIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/veg_icon"
+                                app:layout_constraintBottom_toBottomOf="@id/lunchVeg"
+                                app:layout_constraintEnd_toEndOf="@id/lunchStaplesIcon"
+                                app:layout_constraintStart_toStartOf="@id/lunchStaplesIcon"
+                                app:layout_constraintTop_toTopOf="@id/lunchVeg" />
+
+                            <TextView
+                                android:id="@+id/lunchVeg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                android:fontFamily="@font/jua"
+                                android:inputType="textMultiLine"
+                                android:paddingHorizontal="5dp"
+                                android:paddingVertical="10dp"
+                                android:paddingEnd="20dp"
+                                android:textColor="@color/black"
+                                app:layout_constraintStart_toEndOf="@id/lunchVegIcon"
+                                app:layout_constraintTop_toBottomOf="@id/lunchStaples" />
+
+                            <View
+                                android:id="@+id/divider5"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/lunchVeg" />
+
+                            <ImageView
+                                android:id="@+id/lunchNonVegIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/nonveg_icon"
+                                app:layout_constraintBottom_toBottomOf="@id/lunchNonVeg"
+                                app:layout_constraintEnd_toEndOf="@+id/lunchVegIcon"
+                                app:layout_constraintStart_toStartOf="@id/lunchVegIcon"
+                                app:layout_constraintTop_toTopOf="@id/lunchNonVeg" />
+
+                            <TextView
+                                android:id="@+id/lunchNonVeg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:paddingHorizontal="5dp"
+                                android:paddingVertical="10dp"
+                                android:textColor="@color/black"
+                                app:flow_maxElementsWrap="3"
+                                app:layout_constraintStart_toEndOf="@id/lunchNonVegIcon"
+                                app:layout_constraintTop_toBottomOf="@id/lunchVeg" />
+
+                            <View
+                                android:id="@+id/divider6"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/lunchNonVeg" />
+
+                            <ImageView
+                                android:id="@+id/lunchSidesIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/sides"
+                                app:layout_constraintBottom_toBottomOf="@id/lunchSides"
+                                app:layout_constraintEnd_toEndOf="@+id/lunchNonVegIcon"
+                                app:layout_constraintStart_toStartOf="@id/lunchNonVegIcon"
+                                app:layout_constraintTop_toTopOf="@id/lunchSides" />
+
+                            <TextView
+                                android:id="@+id/lunchSides"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:paddingHorizontal="5dp"
+                                android:paddingVertical="10dp"
+                                android:textColor="@color/black"
+                                app:flow_maxElementsWrap="3"
+                                app:layout_constraintStart_toEndOf="@id/lunchSidesIcon"
+                                app:layout_constraintTop_toBottomOf="@id/lunchNonVeg" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/snacksCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="70dp"
-                        android:fontFamily="@font/jua"
-                        android:lineBreakStyle="strict"
-                        android:paddingHorizontal="5dp"
-                        android:paddingVertical="10dp"
-                        android:text="Boiled Egg"
-                        android:textColor="@color/black"
-                        app:flow_maxElementsWrap="3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/breakfastVeg" />
-
-                    <View
-                        android:id="@+id/divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_marginTop="35dp"
                         android:layout_marginHorizontal="15dp"
-                        android:background="@drawable/horizontal_divider_gradient"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:cardCornerRadius="10dp"
+                        android:elevation="4dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/breakfastVeg" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lunchCard"
+                        app:layout_constraintBaseline_toBottomOf="@id/refresh_button">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/light3">
+
+                            <TextView
+                                android:id="@+id/snacks"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/jua"
+                                android:layout_marginTop="10dp"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:text="Snacks Menu"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                            <ImageView
+                                android:id="@+id/snacksExtrasIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"
+                                android:src="@drawable/hot_beverage"
+                                app:layout_constraintTop_toTopOf="@id/snacksExtras"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="@id/snacksExtras"/>
+
+                            <TextView
+                                android:id="@+id/snacksExtras"
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="10dp"
+                                android:layout_marginTop="5dp"
+                                android:paddingHorizontal="5dp"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:textColor="@color/black"
+                                android:text="Milk/Tea/Coffee"
+                                app:flow_maxElementsWrap="3"
+                                app:layout_constraintStart_toEndOf="@id/snacksExtrasIcon"
+                                app:layout_constraintTop_toBottomOf="@id/snacks" />
+
+                            <View
+                                android:id="@+id/divider7"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/snacksExtras" />
+
+                            <ImageView
+                                android:id="@+id/snacksVegIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/snacks"
+                                app:layout_constraintTop_toTopOf="@id/snacksVeg"
+                                app:layout_constraintStart_toStartOf="@id/snacksExtrasIcon"
+                                app:layout_constraintEnd_toEndOf="@id/snacksExtrasIcon"
+                                app:layout_constraintBottom_toBottomOf="@id/snacksVeg"/>
+
+                            <TextView
+                                android:id="@+id/snacksVeg"
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="10dp"
+                                android:layout_marginTop="5dp"
+                                android:paddingHorizontal="5dp"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:textColor="@color/black"
+                                android:text="Milk/Tea/Coffee"
+                                app:flow_maxElementsWrap="3"
+                                app:layout_constraintStart_toEndOf="@id/snacksVegIcon"
+                                app:layout_constraintTop_toBottomOf="@id/snacksExtras" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
 
 
+            </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
