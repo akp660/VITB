@@ -136,7 +136,7 @@ public class Mess extends Fragment {
     public void MessMenuRetrieval(String messName ,String day){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase.child("Mess").child(messName).child(day).child("Breakfast")
+        mDatabase.child("Mess").child(messName).child(day).child("Breakfast").child("Veg")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
