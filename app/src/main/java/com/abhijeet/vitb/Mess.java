@@ -28,7 +28,7 @@ import java.util.Objects;
 public class Mess extends Fragment {
 
     private TextView text;
-    private TextView textView, breakfastVeg, breakfastNonVeg, lunchVeg, lunchNonVeg, lunchSides, snacks;
+    private TextView textView, breakfastVeg, breakfastNonVeg, lunchVeg, lunchNonVeg, lunchSides, snacks, dinnerVeg, dinnerNonVeg, dinnerSides;
 
     public String messName;
     public String day;
@@ -73,6 +73,9 @@ public class Mess extends Fragment {
         lunchNonVeg = rootView.findViewById(R.id.lunchNonVeg);
         lunchSides = rootView.findViewById(R.id.lunchSides);
         snacks = rootView.findViewById(R.id.snacksVeg);
+        dinnerVeg = rootView.findViewById(R.id.dinnerVeg);
+        dinnerNonVeg = rootView.findViewById(R.id.dinnerNonVeg);
+        dinnerSides = rootView.findViewById(R.id.dinnerSides);
 
         text = rootView.findViewById(R.id.text);
         ImageView imageView = rootView.findViewById(R.id.mess_selection);
@@ -250,6 +253,60 @@ public class Mess extends Fragment {
                         String value = dataSnapshot.getValue(String.class);
                         Log.d("my1log", "Value is: " + value);
                         snacks.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Dinner").child("Veg")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        dinnerVeg.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Dinner").child("NonVeg")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        dinnerNonVeg.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Dinner").child("Sides")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        dinnerSides.setText(value);
                     }
 
                     @Override

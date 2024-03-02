@@ -632,6 +632,179 @@
 
                     </androidx.cardview.widget.CardView>
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/dinnerCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginTop="35dp"
+                        android:elevation="4dp"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/snacksCard">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/light3">
+
+
+                            <TextView
+                                android:id="@+id/Dinner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/jua"
+                                android:text="Dinner Menu"
+                                android:textColor="@color/black"
+                                android:textSize="20dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/dinnerStaplesIcon"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="20dp"
+                                android:src="@drawable/staples"
+                                app:layout_constraintBottom_toBottomOf="@id/dinnerStaples"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/dinnerStaples" />
+
+                            <TextView
+                                android:id="@+id/dinnerStaples"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:paddingHorizontal="5dp"
+                                android:paddingVertical="10dp"
+                                android:text="Rice, Roti, Pickle"
+                                android:textColor="@color/black"
+                                app:flow_maxElementsWrap="3"
+                                app:layout_constraintStart_toEndOf="@id/dinnerStaplesIcon"
+                                app:layout_constraintTop_toBottomOf="@id/Dinner" />
+
+                            <View
+                                android:id="@+id/divider8"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/dinnerStaples" />
+
+                            <ImageView
+                                android:id="@+id/dinnerVegIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/veg_icon"
+                                app:layout_constraintBottom_toBottomOf="@id/lunchVeg"
+                                app:layout_constraintEnd_toEndOf="@id/dinnerStaplesIcon"
+                                app:layout_constraintStart_toStartOf="@id/dinnerStaplesIcon"
+                                app:layout_constraintTop_toTopOf="@id/dinnerVeg" />
+
+                            <TextView
+                                android:id="@+id/dinnerVeg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                android:fontFamily="@font/jua"
+                                android:inputType="textMultiLine"
+                                android:paddingHorizontal="5dp"
+                                android:paddingVertical="10dp"
+                                android:paddingEnd="20dp"
+                                android:textColor="@color/black"
+                                app:layout_constraintStart_toEndOf="@id/dinnerVegIcon"
+                                app:layout_constraintTop_toBottomOf="@id/dinnerStaples" />
+
+                            <View
+                                android:id="@+id/divider9"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/dinnerVeg" />
+
+                            <ImageView
+                                android:id="@+id/dinnerNonVegIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/nonveg_icon"
+                                app:layout_constraintBottom_toBottomOf="@id/dinnerNonVeg"
+                                app:layout_constraintEnd_toEndOf="@+id/dinnerVegIcon"
+                                app:layout_constraintStart_toStartOf="@id/dinnerVegIcon"
+                                app:layout_constraintTop_toTopOf="@id/dinnerNonVeg" />
+
+                            <TextView
+                                android:id="@+id/dinnerNonVeg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:paddingHorizontal="5dp"
+                                android:paddingVertical="10dp"
+                                android:textColor="@color/black"
+                                app:flow_maxElementsWrap="3"
+                                app:layout_constraintStart_toEndOf="@id/dinnerNonVegIcon"
+                                app:layout_constraintTop_toBottomOf="@id/dinnerVeg" />
+
+                            <View
+                                android:id="@+id/divider10"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="15dp"
+                                android:background="@drawable/horizontal_divider_gradient"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/dinnerNonVeg" />
+
+                            <ImageView
+                                android:id="@+id/dinnerSidesIcon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/sides"
+                                app:layout_constraintBottom_toBottomOf="@id/dinnerSides"
+                                app:layout_constraintEnd_toEndOf="@+id/dinnerNonVegIcon"
+                                app:layout_constraintStart_toStartOf="@id/dinnerNonVegIcon"
+                                app:layout_constraintTop_toTopOf="@id/dinnerSides" />
+
+                            <TextView
+                                android:id="@+id/dinnerSides"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginBottom="@dimen/cardview_default_elevation"
+                                android:fontFamily="@font/jua"
+                                android:lineBreakStyle="strict"
+                                android:paddingHorizontal="5dp"
+                                android:paddingVertical="10dp"
+                                android:textColor="@color/black"
+                                app:flow_maxElementsWrap="3"
+                                app:layout_constraintStart_toEndOf="@id/dinnerSidesIcon"
+                                app:layout_constraintTop_toBottomOf="@id/dinnerNonVeg" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </ScrollView>
