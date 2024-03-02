@@ -18,7 +18,7 @@
         android:theme="@style/Theme.VITB"
         tools:targetApi="31">
         <activity
-            android:name=".get_started_screen"
+            android:name=".home_page"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,25 +33,7 @@
             android:name=".Mayuris"
             android:exported="false" />
         <activity
-            android:name=".mess_menu_femail"
-            android:exported="false" />
-        <activity
-            android:name=".mess_menu"
-            android:exported="false" />
-        <activity
-            android:name=".loading_screen"
-            android:exported="false" />
-        <activity
-            android:name=".dev_profile"
-            android:exported="false" />
-        <activity
-            android:name=".web_view"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".home_page"
+            android:name=".get_started_screen"
             android:exported="true"/>
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
