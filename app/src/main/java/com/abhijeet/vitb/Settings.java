@@ -40,6 +40,8 @@ public class Settings extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
+    ImageView plus, crcl_logo;
+
     private String mParam2;
     private boolean isJsonResponseReceived = false;
 
@@ -77,6 +79,8 @@ public class Settings extends Fragment {
         CardView cardview = view.findViewById(R.id.cardView110);
         TextView tempTextView = view.findViewById(R.id.textView21);
         ImageView imageView = view.findViewById(R.id.imageView2);
+        plus = view.findViewById(R.id.imageView5);
+        crcl_logo = view.findViewById(R.id.CRCLlogo);
         TextView icon_Desc = view.findViewById(R.id.textView23);
 
         ImageView defaultMessAdd = view.findViewById(R.id.imageView5);
@@ -207,6 +211,8 @@ public class Settings extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Do nothing, just dismiss the dialog
+                plus.setVisibility(View.GONE);
+                crcl_logo.setVisibility(View.VISIBLE);
             }
         });
 

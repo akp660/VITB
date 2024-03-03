@@ -28,8 +28,9 @@ import java.util.Objects;
 public class Mess extends Fragment {
 
     private TextView text;
-    private TextView textView, breakfastVeg, breakfastNonVeg, lunchVeg, lunchNonVeg, lunchSides, snacks, dinnerVeg, dinnerNonVeg, dinnerSides;
-
+    private TextView textView, breakfastVeg, breakfastNonVeg, lunchVeg, lunchNonVeg, lunchSides, lunchStaples, snacks, dinnerVeg, dinnerNonVeg, dinnerSides, dinnerStaples;
+    private View breakfastNonVegDivider, lunchNonVegDivider, dinnerNonVegDivider;
+    private ImageView breakfastNonVegIcon, lunchNonVegIcon, dinnerNonVegIcon;
     public String messName;
     public String day;
 
@@ -69,13 +70,21 @@ public class Mess extends Fragment {
         // Initialize views
         breakfastVeg = rootView.findViewById(R.id.breakfastVeg);
         breakfastNonVeg = rootView.findViewById(R.id.breakfastNonVeg);
+        breakfastNonVegIcon = rootView.findViewById(R.id.breakFastNonVegIcon);
+        breakfastNonVegDivider = rootView.findViewById(R.id.divider);
         lunchVeg = rootView.findViewById(R.id.lunchVeg);
         lunchNonVeg = rootView.findViewById(R.id.lunchNonVeg);
+        lunchNonVegIcon = rootView.findViewById(R.id.lunchNonVegIcon);
+        lunchNonVegDivider = rootView.findViewById(R.id.divider6);
         lunchSides = rootView.findViewById(R.id.lunchSides);
+        lunchStaples = rootView.findViewById(R.id.lunchStaples);
         snacks = rootView.findViewById(R.id.snacksVeg);
         dinnerVeg = rootView.findViewById(R.id.dinnerVeg);
         dinnerNonVeg = rootView.findViewById(R.id.dinnerNonVeg);
+        dinnerNonVegIcon = rootView.findViewById(R.id.dinnerNonVegIcon);
+        dinnerNonVegDivider = rootView.findViewById(R.id.divider10);
         dinnerSides = rootView.findViewById(R.id.dinnerSides);
+        dinnerStaples = rootView.findViewById(R.id.dinnerStaples);
 
         text = rootView.findViewById(R.id.text);
         ImageView imageView = rootView.findViewById(R.id.mess_selection);
@@ -97,6 +106,7 @@ public class Mess extends Fragment {
 
         if (messName==""){
             //animation pointing select a mess.
+
         }
         else{
             textView.setText(messName);
@@ -174,9 +184,13 @@ public class Mess extends Fragment {
                         Log.d("my1log", "Value is: " + value);
 
                         if (Objects.equals(value, "NIL")){
-                            breakfastNonVeg.setVisibility(View.INVISIBLE);
+                            breakfastNonVeg.setVisibility(View.GONE);
+                            breakfastNonVegIcon.setVisibility(View.GONE);
+                            breakfastNonVegDivider.setVisibility(View.GONE);
                         }
                         else{
+                            breakfastNonVegIcon.setVisibility(View.VISIBLE);
+                            breakfastNonVegDivider.setVisibility(View.VISIBLE);
                             breakfastNonVeg.setVisibility(View.VISIBLE);
                             breakfastNonVeg.setText(value);
                         }
@@ -216,7 +230,18 @@ public class Mess extends Fragment {
                         // whenever data at this location is updated.
                         String value = dataSnapshot.getValue(String.class);
                         Log.d("my1log", "Value is: " + value);
-                        lunchNonVeg.setText(value);
+
+                        if (Objects.equals(value, "NIL")){
+                            lunchNonVeg.setVisibility(View.GONE);
+                            lunchNonVegIcon.setVisibility(View.GONE);
+                            lunchNonVegDivider.setVisibility(View.GONE);
+                        }
+                        else{
+                            lunchNonVegIcon.setVisibility(View.VISIBLE);
+                            lunchNonVegDivider.setVisibility(View.VISIBLE);
+                            lunchNonVeg.setVisibility(View.VISIBLE);
+                            lunchNonVeg.setText(value);
+                        }
                     }
 
                     @Override
@@ -235,6 +260,24 @@ public class Mess extends Fragment {
                         String value = dataSnapshot.getValue(String.class);
                         Log.d("my1log", "Value is: " + value);
                         lunchSides.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Lunch").child("Staples")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        lunchStaples.setText(value);
                     }
 
                     @Override
@@ -288,7 +331,17 @@ public class Mess extends Fragment {
                         // whenever data at this location is updated.
                         String value = dataSnapshot.getValue(String.class);
                         Log.d("my1log", "Value is: " + value);
-                        dinnerNonVeg.setText(value);
+                        if (Objects.equals(value, "NIL")){
+                            dinnerNonVeg.setVisibility(View.GONE);
+                            dinnerNonVegIcon.setVisibility(View.GONE);
+                            dinnerNonVegDivider.setVisibility(View.GONE);
+                        }
+                        else{
+                            dinnerNonVegIcon.setVisibility(View.VISIBLE);
+                            dinnerNonVegDivider.setVisibility(View.VISIBLE);
+                            dinnerNonVeg.setVisibility(View.VISIBLE);
+                            dinnerNonVeg.setText(value);
+                        }
                     }
 
                     @Override
@@ -307,6 +360,24 @@ public class Mess extends Fragment {
                         String value = dataSnapshot.getValue(String.class);
                         Log.d("my1log", "Value is: " + value);
                         dinnerSides.setText(value);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("my1log", "Failed to read value.", error.toException());
+                    }
+                });
+
+        mDatabase.child("Mess").child(messName).child(day).child("Dinner").child("Staples")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("my1log", "Value is: " + value);
+                        dinnerStaples.setText(value);
                     }
 
                     @Override
