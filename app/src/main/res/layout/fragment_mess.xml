@@ -295,8 +295,8 @@
 
                                 <ImageView
                                     android:id="@+id/breakFastVegIcon"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
                                     android:src="@drawable/veg_icon"
                                     app:layout_constraintBottom_toBottomOf="@id/breakfastVeg"
                                     app:layout_constraintEnd_toEndOf="@id/breakFastFruitsIcon"
@@ -332,8 +332,8 @@
 
                                 <ImageView
                                     android:id="@+id/breakFastNonVegIcon"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
                                     android:src="@drawable/nonveg_icon"
                                     app:layout_constraintBottom_toBottomOf="@id/breakfastNonVeg"
                                     app:layout_constraintEnd_toEndOf="@+id/breakFastVegIcon"
@@ -442,8 +442,8 @@
 
                                 <ImageView
                                     android:id="@+id/lunchVegIcon"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
                                     android:src="@drawable/veg_icon"
                                     app:layout_constraintBottom_toBottomOf="@id/lunchVeg"
                                     app:layout_constraintEnd_toEndOf="@id/lunchStaplesIcon"
@@ -479,8 +479,8 @@
 
                                 <ImageView
                                     android:id="@+id/lunchNonVegIcon"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
                                     android:src="@drawable/nonveg_icon"
                                     app:layout_constraintBottom_toBottomOf="@id/lunchNonVeg"
                                     app:layout_constraintEnd_toEndOf="@+id/lunchVegIcon"
@@ -713,8 +713,8 @@
 
                                 <ImageView
                                     android:id="@+id/dinnerVegIcon"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
                                     android:src="@drawable/veg_icon"
                                     app:layout_constraintBottom_toBottomOf="@+id/dinnerVeg"
                                     app:layout_constraintEnd_toEndOf="@id/dinnerStaplesIcon"
@@ -750,11 +750,12 @@
 
                                 <ImageView
                                     android:id="@+id/dinnerNonVegIcon"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
                                     android:src="@drawable/nonveg_icon"
-                                    app:layout_constraintBottom_toBottomOf="@id/dinnerNonVeg"
+                                    app:layout_constraintBottom_toBottomOf="@+id/dinnerNonVeg"
                                     app:layout_constraintEnd_toEndOf="@+id/dinnerVegIcon"
+                                    app:layout_constraintHorizontal_bias="0.0"
                                     app:layout_constraintStart_toStartOf="@id/dinnerVegIcon"
                                     app:layout_constraintTop_toTopOf="@id/dinnerNonVeg" />
 
