@@ -27,7 +27,7 @@ import java.util.Objects;
 
 public class Mess extends Fragment {
 
-    private TextView text;
+    private TextView text, text2;
     private TextView textView, breakfastVeg, breakfastNonVeg, lunchVeg, lunchNonVeg, lunchSides, lunchStaples, snacks, dinnerVeg, dinnerNonVeg, dinnerSides, dinnerStaples;
     private View breakfastNonVegDivider, lunchNonVegDivider, dinnerNonVegDivider;
     private ImageView breakfastNonVegIcon, lunchNonVegIcon, dinnerNonVegIcon;
@@ -87,6 +87,7 @@ public class Mess extends Fragment {
         dinnerStaples = rootView.findViewById(R.id.dinnerStaples);
 
         text = rootView.findViewById(R.id.text);
+        text2 = rootView.findViewById(R.id.text2);
         ImageView imageView = rootView.findViewById(R.id.mess_selection);
         textView = rootView.findViewById(R.id.mess_name);
         CardView calender = rootView.findViewById(R.id.calender);
@@ -98,8 +99,10 @@ public class Mess extends Fragment {
         int initialDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         text.setText(String.valueOf(initialDayOfMonth));
 
+
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         day = getDayOfWeekString(dayOfWeek);
+        text2.setText(day);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         messName = preferences.getString("messName","");
@@ -130,6 +133,8 @@ public class Mess extends Fragment {
                                 String day1 = getDayOfWeekString(dayOfWeek);
                                 day = day1;
                                 text.setText(String.valueOf(dayOfMonth));
+                                text2.setText(day);
+
                                 MessMenuRetrieval(messName,day);
                             }
                         }, initialYear, initialMonth, initialDayOfMonth);

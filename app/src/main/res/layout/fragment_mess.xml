@@ -62,11 +62,25 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/jua"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/jua"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
