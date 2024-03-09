@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +35,7 @@ public class Mess extends Fragment {
     private ImageView breakfastNonVegIcon, lunchNonVegIcon, dinnerNonVegIcon;
     public String messName;
     public String day;
+    ImageView refresh_button;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -67,6 +70,16 @@ public class Mess extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_mess, container, false);
 
+        refresh_button = rootView.findViewById(R.id.refresh_button);
+        refresh_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RotateAnimation rotateAnimation = new RotateAnimation(360, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+                rotateAnimation.setDuration(500);
+                refresh_button.startAnimation(rotateAnimation);
+                MessMenuRetrieval(messName,day);
+            }
+        });
         // Initialize views
         breakfastVeg = rootView.findViewById(R.id.breakfastVeg);
         breakfastNonVeg = rootView.findViewById(R.id.breakfastNonVeg);
