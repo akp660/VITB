@@ -70,6 +70,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView6" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mayuriRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:scrollbars="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="50sp"
                 android:layout_height="50sp"
