@@ -1,14 +1,14 @@
-package com.abhijeet.vitb;
+package com.abhijeet.vitb.UnderbelyRetrieval;
 
-public class MayuriItem {
+public class UnderbelyItem {
     private String name;
     private String price;
 
-    public MayuriItem(){
+    public UnderbelyItem(){
 
     }
 
-    public MayuriItem(String name, String price){
+    public UnderbelyItem(String name, String price){
         this.name = name;
         this.price = price;
     }
@@ -29,4 +29,5 @@ public class MayuriItem {
         this.price = price;
     }
 }
+
 

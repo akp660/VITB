@@ -1,4 +1,4 @@
-package com.abhijeet.vitb;
+package com.abhijeet.vitb.MayuriRetrieval;
 
 import java.util.List;
 

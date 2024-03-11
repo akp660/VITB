@@ -1,10 +1,12 @@
-package com.abhijeet.vitb;
+package com.abhijeet.vitb.Activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.abhijeet.vitb.R;
+import com.abhijeet.vitb.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 

@@ -3,8 +3,13 @@ package com.abhijeet.vitb;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import com.abhijeet.vitb.Fragments.Mayuri;
+import com.abhijeet.vitb.Fragments.Mess;
+import com.abhijeet.vitb.Fragments.NightCanteen;
+import com.abhijeet.vitb.Fragments.Settings;
+import com.abhijeet.vitb.Fragments.Underbely;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 

@@ -1,4 +1,4 @@
-package com.abhijeet.vitb;
+package com.abhijeet.vitb.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.Button;
+
+import com.abhijeet.vitb.R;
 
 public class get_started_screen extends AppCompatActivity {
 
