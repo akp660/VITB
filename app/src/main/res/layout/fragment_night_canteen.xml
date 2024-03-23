@@ -45,7 +45,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:iconifiedByDefault="false"
-                        android:background="@color/dark3"
+                        android:background="@color/light4"
                         android:elevation="12dp"
                         android:queryHint="Search Food Item"
                         app:layout_constraintBottom_toBottomOf="parent"

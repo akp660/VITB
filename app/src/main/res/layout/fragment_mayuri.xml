@@ -44,7 +44,7 @@
                         android:id="@+id/searchView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/dark3"
+                        android:background="@color/light4"
                         android:elevation="12dp"
                         android:iconifiedByDefault="false"
                         android:queryHint="Search Food Item"
