@@ -72,6 +72,7 @@ public class Mess extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_mess, container, false);
 
         refresh_button = rootView.findViewById(R.id.refresh_button);
+
         refresh_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +82,7 @@ public class Mess extends Fragment {
                 MessMenuRetrieval(messName,day);
             }
         });
+
         // Initialize views
         breakfastVeg = rootView.findViewById(R.id.breakfastVeg);
         breakfastNonVeg = rootView.findViewById(R.id.breakfastNonVeg);
@@ -106,13 +108,11 @@ public class Mess extends Fragment {
         textView = rootView.findViewById(R.id.mess_name);
         CardView calender = rootView.findViewById(R.id.calender);
 
-        // Set today's date in the text TextView by default
         Calendar calendar = Calendar.getInstance();
         int initialYear = calendar.get(Calendar.YEAR);
         int initialMonth = calendar.get(Calendar.MONTH);
         int initialDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         text.setText(String.valueOf(initialDayOfMonth));
-
 
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         day = getDayOfWeekString(dayOfWeek);
@@ -121,15 +121,13 @@ public class Mess extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         messName = preferences.getString("messName","");
 
-        if (messName==""){
+        if (messName.equals("")){
             //animation pointing select a mess.
-
         }
         else{
             textView.setText(messName);
             MessMenuRetrieval(messName,day);
         }
-
 
         // Set OnClickListener for the calender CardView
         calender.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +155,6 @@ public class Mess extends Fragment {
                 datePickerDialog.show();
             }
         });
-
 
         // Set OnClickListener for the imageView
         imageView.setOnClickListener(new View.OnClickListener() {

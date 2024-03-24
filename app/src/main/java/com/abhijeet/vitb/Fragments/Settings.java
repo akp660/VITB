@@ -29,6 +29,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Settings extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -36,6 +38,7 @@ public class Settings extends Fragment {
 
     private String mParam1;
     ImageView plus, crcl_logo;
+    public String messName;
 
     private String mParam2;
     private boolean isJsonResponseReceived = false;
@@ -79,6 +82,29 @@ public class Settings extends Fragment {
         TextView icon_Desc = view.findViewById(R.id.textView23);
 
         ImageView defaultMessAdd = view.findViewById(R.id.imageView5);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        messName = preferences.getString("messName","");
+
+        if (messName!=""){
+            Log.d("mylog2", messName);
+            plus.setVisibility(View.GONE);
+            crcl_logo.setVisibility(View.VISIBLE);
+
+            if (Objects.equals(messName, "CRCL"))crcl_logo.setImageResource(R.drawable.crcl_logo);
+            else if (Objects.equals(messName, "Mayuri (Boys)")) crcl_logo.setImageResource(R.drawable.mayurib_logo);
+            else if (Objects.equals(messName, "Mayuri (Girls)")) crcl_logo.setImageResource(R.drawable.mayurig_logo);
+            else if (Objects.equals(messName, "AB")) crcl_logo.setImageResource(R.drawable.ab_logo);
+            else if (Objects.equals(messName, "Foodex")) crcl_logo.setImageResource(R.drawable.foodex_logo);
+//            else {
+//                plus.setVisibility(View.VISIBLE);
+//                crcl_logo.setVisibility(View.GONE);
+//            }
+        }
+        else{
+            plus.setVisibility(View.VISIBLE);
+        }
+
         defaultMessAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,9 +112,14 @@ public class Settings extends Fragment {
                 showNameSelectionPopup();
             }
         });
+        crcl_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showNameSelectionPopup();
+            }
+        });
 
         long currentTimeMillis = System.currentTimeMillis();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         long lastApiCallTimestamp = preferences.getLong("last_api_call_timestamp", 0);
 
         if (currentTimeMillis - lastApiCallTimestamp < TWO_HOURS_IN_MILLIS) {
@@ -152,7 +183,7 @@ public class Settings extends Fragment {
                 public void onErrorResponse(VolleyError error) {
                     tempTextView.setText("25°C");
                     icon_Desc.setText("scattered clouds");
-                    Picasso.get().load("https://openweathermap.org/img/wn/03d@2x.png").into(imageView);
+                    Picasso.get().load("https://openw eathermap.org/img/wn/03d@2x.png").into(imageView);
                     isJsonResponseReceived = true;
                     shimmerLayout.stopShimmer();
                     shimmerLayout.setVisibility(View.GONE);
@@ -190,13 +221,11 @@ public class Settings extends Fragment {
         builder.setSingleChoiceItems(names, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Set the selected name to textView
+
                 String messName = names[which];
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
                 SharedPreferences.Editor editor = preferences.edit();
-
                 editor.putString("messName", messName);
-
                 editor.apply();
             }
         });
@@ -205,9 +234,17 @@ public class Settings extends Fragment {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Do nothing, just dismiss the dialog
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+                String selectedName = preferences.getString("messName", "");
+
                 plus.setVisibility(View.GONE);
                 crcl_logo.setVisibility(View.VISIBLE);
+
+                if (selectedName=="CRCL")crcl_logo.setImageResource(R.drawable.crcl_logo);
+                else if (selectedName=="Mayuri (Boys)") crcl_logo.setImageResource(R.drawable.mayurib_logo);
+                else if (selectedName=="Mayuri (Girls)") crcl_logo.setImageResource(R.drawable.mayurig_logo);
+                else if (selectedName=="AB") crcl_logo.setImageResource(R.drawable.ab_logo);
+                else if (selectedName=="Foodex") crcl_logo.setImageResource(R.drawable.foodex_logo);
             }
         });
 
