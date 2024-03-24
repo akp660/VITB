@@ -210,14 +210,14 @@
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/jua"
-                    android:textColor="@color/black"
                     android:text="App Default Settings"
+                    android:textColor="@color/black"
                     android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView110" />
+                    app:layout_constraintTop_toTopOf="@+id/textView12" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView10"
@@ -242,10 +242,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="25dp"
+                            android:layout_marginBottom="25dp"
                             android:fontFamily="@font/jua"
                             android:text="Default mess type"
                             android:textColor="#191919"
                             android:textSize="22sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -260,29 +262,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/textView15"
                             app:layout_constraintTop_toTopOf="@id/textView15" />
-                        <TextView
-                            android:id="@+id/textView16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="25dp"
-                            android:fontFamily="@font/jua"
-                            android:text="Dark Theme"
-                            android:textColor="#191919"
-                            android:textSize="22sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/switch1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="15dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/textView16" />
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -320,7 +299,6 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="30dp"
                     app:cardCornerRadius="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -332,130 +310,19 @@
                         android:background="@color/light3">
 
                         <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cardView8"
+                            android:id="@+id/materialCardView"
                             android:layout_width="match_parent"
                             android:layout_height="50sp"
-                            android:layout_marginStart="50dp"
-                            android:layout_marginTop="40dp"
-                            android:layout_marginEnd="50dp"
-                            app:cardCornerRadius="12sp"
-                            app:cardElevation="12sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:strokeColor="@color/light4"
-                            app:strokeWidth="2sp">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/light2">
-
-                                <TextView
-                                    android:id="@+id/textView11"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/jua"
-                                    android:textColor="@color/black"
-                                    android:text="Delete Account"
-                                    android:textSize="20sp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@id/icon1"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <ImageView
-                                    android:id="@+id/icon1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="10dp"
-                                    android:src="@drawable/delete_icon"
-                                    app:layout_constraintBottom_toBottomOf="@+id/textView11"
-                                    app:layout_constraintStart_toEndOf="@id/textView11"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="@+id/textView11" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cardView11"
-                            android:layout_width="match_parent"
-                            android:layout_height="50sp"
-                            android:layout_marginStart="50dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginEnd="50dp"
-                            app:cardCornerRadius="12sp"
-                            app:cardElevation="12sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/cardView8"
-                            app:strokeColor="@color/light4"
-                            app:strokeWidth="2sp">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/light2">
-
-                                <TextView
-                                    android:id="@+id/textView17"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="35dp"
-                                    android:fontFamily="@font/jua"
-                                    android:text="Log Out"
-                                    android:textColor="@color/black"
-                                    android:textSize="20sp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <ImageView
-                                    android:id="@+id/imageView3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="35dp"
-                                    android:src="@drawable/log_out_icon"
-                                    app:layout_constraintBottom_toBottomOf="@+id/textView17"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toEndOf="@id/textView17"
-                                    app:layout_constraintTop_toTopOf="@+id/textView17" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <TextView
-                            android:id="@+id/textView18"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
                             android:layout_marginTop="25dp"
-                            android:fontFamily="@font/jua"
-                            android:text="Update Log"
-                            android:textColor="#1C1C1C"
-                            android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/cardView11" />
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="50sp"
-                            android:layout_marginStart="50dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginEnd="50dp"
-                            android:layout_marginBottom="40dp"
+                            android:layout_marginEnd="40dp"
+                            android:layout_marginBottom="25dp"
                             app:cardCornerRadius="12sp"
                             app:cardElevation="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView18"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:strokeColor="@color/light4"
                             app:strokeWidth="2sp">
 
@@ -501,10 +368,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
                     android:text="Version 2.0.1"
                     android:textColor="@color/black"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
