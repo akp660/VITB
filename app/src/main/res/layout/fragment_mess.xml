@@ -27,16 +27,40 @@
             android:layout_height="match_parent"
             android:background="@color/light2">
 
-            <ImageView
-                android:id="@+id/mess_selection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="35sp"
+                android:layout_height="35sp"
                 android:layout_marginEnd="25dp"
-                android:elevation="15sp"
-                android:src="@drawable/menu_icon"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#D84C48FF"
+                app:strokeWidth="2sp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/light1">
+
+                    <ImageView
+                        android:id="@+id/mess_selection"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="2dp"
+                        android:src="@drawable/menu_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/calender"
