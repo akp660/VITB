@@ -56,8 +56,6 @@
                             android:layout_height="wrap_content"
                             android:background="@color/light4"
                             android:elevation="12dp"
-                            android:iconifiedByDefault="false"
-                            android:queryHint="Search Food Item"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
