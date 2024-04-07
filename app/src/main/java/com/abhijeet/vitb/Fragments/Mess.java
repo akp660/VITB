@@ -2,9 +2,13 @@ package com.abhijeet.vitb.Fragments;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,8 +84,12 @@ public class Mess extends Fragment {
                 rotateAnimation.setDuration(500);
                 refresh_button.startAnimation(rotateAnimation);
                 MessMenuRetrieval(messName,day);
+
+                vibrate();
             }
         });
+
+
 
         // Initialize views
         breakfastVeg = rootView.findViewById(R.id.breakfastVeg);
@@ -153,6 +161,8 @@ public class Mess extends Fragment {
 
                 // Show the DatePickerDialog
                 datePickerDialog.show();
+
+                haptic ();
             }
         });
 
@@ -162,6 +172,7 @@ public class Mess extends Fragment {
             public void onClick(View v) {
                 // Show the popup with names
                 showNameSelectionPopup(day);
+                haptic();
             }
         });
 
@@ -457,6 +468,30 @@ public class Mess extends Fragment {
                 return "Sat";
             default:
                 return "";
+        }
+    }
+
+
+    // Define the vibrate method outside of the onClick method
+    private void vibrate() {
+        Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(100);
+            }
+        }
+    }
+
+    private void haptic() {
+        Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(50);
+            }
         }
     }
 

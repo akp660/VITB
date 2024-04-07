@@ -2,24 +2,31 @@ package com.abhijeet.vitb.Activities;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.abhijeet.vitb.R;
 import com.abhijeet.vitb.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
-
-
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
 
 public class home_page extends AppCompatActivity {
+
+    private AppUpdateManager appUpdateManager;
+    private final int updateType = AppUpdateType.IMMEDIATE;
 
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
-//    MainAdapter adapter;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
@@ -31,26 +38,28 @@ public class home_page extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-//        viewPager.setAdapter(adapter);
-//        tabLayout.setupWithViewPager(viewPager);
+        // Initialize AppUpdateManager.
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+        // Check for update.
+        checkForAppUpdate();
+    }
 
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager.setCurrentItem(tab.getPosition());
-////                Toast.makeText(home_page.this, "position : "+position, Toast.LENGTH_SHORT).show();
-//            }
-////
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//            }
-//        });
-
-
+    private void checkForAppUpdate() {
+        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(updateType)) {
+                // Request the update.
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            appUpdateInfo,
+                            updateType,
+                            home_page.this,
+                            123 // Arbitrary request code
+                    );
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
-

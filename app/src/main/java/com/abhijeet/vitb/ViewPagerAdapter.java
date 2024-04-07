@@ -36,6 +36,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         else if (position == 4){
             fragment = new Settings();
         }
+        assert fragment != null;
         return fragment;
     }
 
