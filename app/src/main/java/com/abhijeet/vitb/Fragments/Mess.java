@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -84,8 +85,18 @@ public class Mess extends Fragment {
                 rotateAnimation.setDuration(500);
                 refresh_button.startAnimation(rotateAnimation);
                 MessMenuRetrieval(messName,day);
-
                 vibrate();
+
+                // Create custom toast
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.fragment_toast_layout, null); // Remove the toast_layout_root parameter
+                TextView text = layout.findViewById(R.id.text_toast);
+                text.setText("Refreshing...");
+
+                Toast toast = new Toast(requireContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
             }
         });
 
