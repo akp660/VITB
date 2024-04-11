@@ -56,10 +56,12 @@
                             android:layout_height="wrap_content"
                             android:background="@color/light4"
                             android:elevation="12dp"
+                            android:hapticFeedbackEnabled="true"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:queryHint="Search your food..." />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -120,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="75dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
