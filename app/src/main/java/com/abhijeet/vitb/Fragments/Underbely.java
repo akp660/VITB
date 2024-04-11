@@ -1,5 +1,10 @@
 package com.abhijeet.vitb.Fragments;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,13 +12,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.abhijeet.vitb.MayuriRetrieval.MayuriCategory;
 import com.abhijeet.vitb.MayuriRetrieval.MayuriCategoryAdapter;
@@ -35,7 +46,7 @@ import java.util.List;
  */
 public class Underbely extends Fragment {
 
-    ImageView refresh_button;
+    ImageView refresh_button, selected_item;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -94,6 +105,30 @@ public class Underbely extends Fragment {
                 RotateAnimation rotateAnimation = new RotateAnimation(360, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
                 rotateAnimation.setDuration(500);
                 refresh_button.startAnimation(rotateAnimation);
+                vibrate();
+
+                // Show toast
+                // Create custom toast
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.fragment_toast_layout, null); // Remove the toast_layout_root parameter
+                TextView text = layout.findViewById(R.id.text_toast);
+                text.setText("Refreshing...");
+
+                Toast toast = new Toast(requireContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
+            }
+        });
+
+
+        // on click listner on refresh button
+        selected_item = rootView.findViewById(R.id.selected_item);
+        selected_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBottomSheet();
+                haptic();
             }
         });
 
@@ -141,6 +176,46 @@ public class Underbely extends Fragment {
 
         return rootView;
     }
+
+
+
+
+    // Define the vibrate method outside of the onClick method
+    private void vibrate() {
+        Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(100);
+            }
+        }
+    }
+
+    private void haptic() {
+        Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(50);
+            }
+        }
+    }
+
+    private void openBottomSheet() {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottomsheetlayout);
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+
+
 }
 
 
