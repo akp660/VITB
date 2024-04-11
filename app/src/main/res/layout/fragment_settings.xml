@@ -310,7 +310,7 @@
                         android:background="@color/light3">
 
                         <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/materialCardView"
+                            android:id="@+id/check_update"
                             android:layout_width="match_parent"
                             android:layout_height="50sp"
                             android:layout_marginStart="40dp"

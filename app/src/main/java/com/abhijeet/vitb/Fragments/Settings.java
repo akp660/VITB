@@ -1,16 +1,26 @@
 package com.abhijeet.vitb.Fragments;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -23,6 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -38,8 +49,8 @@ public class Settings extends Fragment {
 
     private String mParam1;
     ImageView plus, crcl_logo;
+    MaterialCardView check_update;
     public String messName;
-
     private String mParam2;
     private boolean isJsonResponseReceived = false;
 
@@ -81,6 +92,21 @@ public class Settings extends Fragment {
         crcl_logo = view.findViewById(R.id.CRCLlogo);
         TextView icon_Desc = view.findViewById(R.id.textView23);
 
+        check_update = view.findViewById(R.id.check_update); // Initialize check_update
+
+        check_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Your click listener code
+                vibrate();
+                openPlayStoreLink();
+                // Other code...
+            }
+        });
+
+
+
+
         ImageView defaultMessAdd = view.findViewById(R.id.imageView5);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
@@ -118,6 +144,8 @@ public class Settings extends Fragment {
                 showNameSelectionPopup();
             }
         });
+
+
 
         long currentTimeMillis = System.currentTimeMillis();
         long lastApiCallTimestamp = preferences.getLong("last_api_call_timestamp", 0);
@@ -250,6 +278,39 @@ public class Settings extends Fragment {
 
         // Show the dialog
         builder.show();
+    }
+
+    // Define the vibrate method outside of the onClick method
+    private void vibrate() {
+        Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(100);
+            }
+        }
+    }
+
+    private void haptic() {
+        Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(50);
+            }
+        }
+    }
+
+    private void openPlayStoreLink() {
+        String appPackageName = requireContext().getPackageName(); // Get package name of the app
+
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
     }
 
 }
