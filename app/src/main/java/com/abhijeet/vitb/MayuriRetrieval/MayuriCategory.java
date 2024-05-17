@@ -2,12 +2,12 @@ package com.abhijeet.vitb.MayuriRetrieval;
 
 import java.util.List;
 
-public class Category {
+public class MayuriCategory {
     private String title;
-    private List<Item> items;
+    private List<MayuriItem> items;
     private boolean selected;
 
-    public Category(String title, List<Item> items) {
+    public MayuriCategory(String title, List<MayuriItem> items) {
         this.title = title;
         this.items = items;
         this.selected = false;
@@ -17,7 +17,7 @@ public class Category {
         return title;
     }
 
-    public List<Item> getItems() {
+    public List<MayuriItem> getItems() {
         return items;
     }
 

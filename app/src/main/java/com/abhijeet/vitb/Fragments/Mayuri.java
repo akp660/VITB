@@ -27,10 +27,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.abhijeet.vitb.MayuriRetrieval.Category;
-import com.abhijeet.vitb.MayuriRetrieval.CategoryAdapter;
-import com.abhijeet.vitb.MayuriRetrieval.Item;
-import com.abhijeet.vitb.MayuriRetrieval.ItemAdapter;
+import com.abhijeet.vitb.MayuriRetrieval.MayuriCategory;
+import com.abhijeet.vitb.MayuriRetrieval.MayuriCategoryAdapter;
+import com.abhijeet.vitb.MayuriRetrieval.MayuriItem;
+import com.abhijeet.vitb.MayuriRetrieval.MayuriItemAdapter;
 import com.abhijeet.vitb.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,15 +42,15 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mayuri extends Fragment implements CategoryAdapter.OnCategoryClickListener {
+public class Mayuri extends Fragment implements MayuriCategoryAdapter.OnCategoryClickListener {
     private static final String MAYURI_CATEGORIES_KEY = "mayuri_categories";
     private RecyclerView recyclerViewItems;
     private LinearLayout categoryContainer;
     private ImageView refreshButton, selectedItem;
-    private List<Category> mayuriCategoryList = new ArrayList<>();
-    private List<Item> itemList = new ArrayList<>();
-    private ItemAdapter itemAdapter;
-    private CategoryAdapter categoryAdapter;
+    private List<MayuriCategory> mayuriCategoryList = new ArrayList<>();
+    private List<MayuriItem> itemList = new ArrayList<>();
+    private MayuriItemAdapter itemAdapter;
+    private MayuriCategoryAdapter categoryAdapter;
 
     @Nullable
     @Override
@@ -63,7 +63,7 @@ public class Mayuri extends Fragment implements CategoryAdapter.OnCategoryClickL
         selectedItem = view.findViewById(R.id.selected_item);
 
         // Setup item RecyclerView
-        itemAdapter = new ItemAdapter(itemList);
+        itemAdapter = new MayuriItemAdapter(itemList);
         recyclerViewItems.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewItems.setAdapter(itemAdapter);
 
@@ -94,7 +94,7 @@ public class Mayuri extends Fragment implements CategoryAdapter.OnCategoryClickL
         String categoryJson = sharedPreferences.getString(MAYURI_CATEGORIES_KEY, null);
 
         if (categoryJson != null) {
-            List<Category> storedCategories = new Gson().fromJson(categoryJson, new TypeToken<List<Category>>() {}.getType());
+            List<MayuriCategory> storedCategories = new Gson().fromJson(categoryJson, new TypeToken<List<MayuriCategory>>() {}.getType());
             mayuriCategoryList.addAll(storedCategories);
             populateCategoryContainer();
         } else {
@@ -102,7 +102,7 @@ public class Mayuri extends Fragment implements CategoryAdapter.OnCategoryClickL
         }
     }
 
-    private void saveDataToSharedPreferences(List<Category> categories) {
+    private void saveDataToSharedPreferences(List<MayuriCategory> categories) {
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String categoryJson = new Gson().toJson(categories);
@@ -120,14 +120,14 @@ public class Mayuri extends Fragment implements CategoryAdapter.OnCategoryClickL
 
                 for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) {
                     String categoryName = categorySnapshot.getKey();
-                    List<Item> items = new ArrayList<>();
+                    List<MayuriItem> items = new ArrayList<>();
 
                     for (DataSnapshot itemSnapshot : categorySnapshot.child("Items").getChildren()) {
-                        Item item = itemSnapshot.getValue(Item.class);
+                        MayuriItem item = itemSnapshot.getValue(MayuriItem.class);
                         items.add(item);
                     }
 
-                    Category category = new Category(categoryName, items);
+                    MayuriCategory category = new MayuriCategory(categoryName, items);
                     mayuriCategoryList.add(category);
                 }
 
@@ -145,7 +145,7 @@ public class Mayuri extends Fragment implements CategoryAdapter.OnCategoryClickL
     private void populateCategoryContainer() {
         categoryContainer.removeAllViews();
 
-        for (Category category : mayuriCategoryList) {
+        for (MayuriCategory category : mayuriCategoryList) {
             View categoryView = LayoutInflater.from(getContext()).inflate(R.layout.item_category, categoryContainer, false);
             ImageView categoryImage = categoryView.findViewById(R.id.categoryImage);
             TextView categoryTitle = categoryView.findViewById(R.id.categoryTitle);
@@ -165,15 +165,15 @@ public class Mayuri extends Fragment implements CategoryAdapter.OnCategoryClickL
         }
     }
 
-    private void loadItems(Category category) {
+    private void loadItems(MayuriCategory category) {
         itemList.clear();
         itemList.addAll(category.getItems());
         itemAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onCategoryClick(Category category) {
-        for (Category cat : mayuriCategoryList) {
+    public void onCategoryClick(MayuriCategory category) {
+        for (MayuriCategory cat : mayuriCategoryList) {
             cat.setSelected(false);
         }
         category.setSelected(true);

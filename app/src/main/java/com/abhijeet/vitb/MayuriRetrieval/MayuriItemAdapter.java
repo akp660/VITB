@@ -1,12 +1,10 @@
 package com.abhijeet.vitb.MayuriRetrieval;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.abhijeet.vitb.R;
@@ -14,8 +12,8 @@ import com.abhijeet.vitb.R;
 import java.util.List;
 
 // ItemAdapter.java
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
-    private List<Item> itemList;
+public class MayuriItemAdapter extends RecyclerView.Adapter<MayuriItemAdapter.ItemViewHolder> {
+    private List<MayuriItem> itemList;
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
         public TextView textName;
@@ -28,7 +26,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
     }
 
-    public ItemAdapter(List<Item> itemList) {
+    public MayuriItemAdapter(List<MayuriItem> itemList) {
         this.itemList = itemList;
     }
 
@@ -40,7 +38,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
-        Item item = itemList.get(position);
+        MayuriItem item = itemList.get(position);
         holder.textName.setText(item.getName());
         holder.textPrice.setText(item.getPrice());
     }

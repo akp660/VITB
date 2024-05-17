@@ -1,34 +1,31 @@
 package com.abhijeet.vitb.UnderbelyRetrieval;
 
-import com.abhijeet.vitb.Fragments.Underbely;
-
 import java.util.List;
 
 public class UnderbelyCategory {
-    private String categoryName;
+    private String title;
     private List<UnderbelyItem> items;
+    private boolean selected;
 
-    public UnderbelyCategory() {
-
-    }
-    public UnderbelyCategory(String categoryName, List<UnderbelyItem> items){
-        this.categoryName = categoryName;
-        this.items=items;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
+    public UnderbelyCategory(String title, List<UnderbelyItem> items) {
+        this.title = title;
+        this.items = items;
+        this.selected = false;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public String getTitle() {
+        return title;
     }
 
     public List<UnderbelyItem> getItems() {
         return items;
     }
 
-    public void setItems(List<UnderbelyItem> items) {
-        this.items = items;
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

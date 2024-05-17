@@ -1,14 +1,14 @@
 package com.abhijeet.vitb.MayuriRetrieval;
 
-public class Item {
+public class MayuriItem {
     private String name;
     private String price;
 
-    public Item() {
+    public MayuriItem() {
         // Default constructor required for calls to DataSnapshot.getValue(Item.class)
     }
 
-    public Item(String name, String price) {
+    public MayuriItem(String name, String price) {
         this.name = name;
         this.price = price;
     }

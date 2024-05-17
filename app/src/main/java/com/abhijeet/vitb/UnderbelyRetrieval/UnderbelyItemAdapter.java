@@ -1,45 +1,80 @@
 package com.abhijeet.vitb.UnderbelyRetrieval;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.abhijeet.vitb.R;
 
 import java.util.List;
 
+// ItemAdapter.java
+public class UnderbelyItemAdapter extends RecyclerView.Adapter<UnderbelyItemAdapter.ItemViewHolder> {
+    private List<UnderbelyItem> itemList;
 
-public class UnderbelyItemAdapter extends RecyclerView.Adapter<UnderbelyItemViewHolder> {
+    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+        public TextView textName;
+        public TextView textPrice;
 
-    private List<UnderbelyItem> underbelyItemList;
-    private Context context;
-
-    public UnderbelyItemAdapter(List<UnderbelyItem> underbelyItemList, Context context){
-        this.underbelyItemList = underbelyItemList;
-        this.context = context;
-    }
-    @NonNull
-    @Override
-    public UnderbelyItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_mayuri, parent, false);
-        return new UnderbelyItemViewHolder(view);
+        public ItemViewHolder(View itemView) {
+            super(itemView);
+            textName = itemView.findViewById(R.id.textName);
+            textPrice = itemView.findViewById(R.id.textPrice);
+        }
     }
 
+    public UnderbelyItemAdapter(List<UnderbelyItem> itemList) {
+        this.itemList = itemList;
+    }
+
     @Override
-    public void onBindViewHolder(@NonNull UnderbelyItemViewHolder holder, int position) {
-        UnderbelyItem underbelyItem = underbelyItemList.get(position);
-        holder.textName.setText(underbelyItem.getName());
-        holder.textPrice.setText(underbelyItem.getPrice());
+    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mayuri, parent, false);
+        return new ItemViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ItemViewHolder holder, int position) {
+        UnderbelyItem item = itemList.get(position);
+        holder.textName.setText(item.getName());
+        holder.textPrice.setText(item.getPrice());
     }
 
     @Override
     public int getItemCount() {
-        return underbelyItemList.size();
+        return itemList.size();
     }
-
 }
 
+//public class ItemAdapter extends RecyclerView.Adapter<MayuriItemViewHolder> {
+//
+//    private List<Item> mayuriItemList;
+//    private Context context;
+//
+//    public ItemAdapter(List<Item> mayuriItemList, Context context){
+//        this.mayuriItemList = mayuriItemList;
+//        this.context = context;
+//    }
+//    @NonNull
+//    @Override
+//    public MayuriItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        View view = LayoutInflater.from(context).inflate(R.layout.item_mayuri, parent, false);
+//        return new MayuriItemViewHolder(view);
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull MayuriItemViewHolder holder, int position) {
+//        Item mayuriItem = mayuriItemList.get(position);
+//        holder.textName.setText(mayuriItem.getName());
+//        holder.textPrice.setText(mayuriItem.getPrice());
+//    }
+//
+//    @Override
+//    public int getItemCount() {
+//        return mayuriItemList.size();
+//    }
+//
+//}

@@ -1,57 +1,75 @@
 package com.abhijeet.vitb.UnderbelyRetrieval;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.abhijeet.vitb.R;
-
 import java.util.List;
 
-public class UnderbelyCategoryAdapter extends RecyclerView.Adapter<com.abhijeet.vitb.UnderbelyRetrieval.UnderbelyCategoryAdapter.UnderbelyCategoryViewHolder>{
+public class UnderbelyCategoryAdapter extends RecyclerView.Adapter<UnderbelyCategoryAdapter.CategoryViewHolder> {
+    private List<UnderbelyCategory> categoryList;
+    private OnCategoryClickListener categoryClickListener;
 
-    private List<UnderbelyCategory> UnderbelyCategoryList;
-    private Context context;
-
-    public UnderbelyCategoryAdapter (List<UnderbelyCategory> UnderbelyCategoryList, Context context){
-        this.UnderbelyCategoryList = UnderbelyCategoryList;
-        this.context = context;
+    public interface OnCategoryClickListener {
+        void onCategoryClick(UnderbelyCategory category);
     }
+
+    public UnderbelyCategoryAdapter(List<UnderbelyCategory> categoryList, OnCategoryClickListener categoryClickListener) {
+        this.categoryList = categoryList;
+        this.categoryClickListener = categoryClickListener;
+    }
+
     @NonNull
     @Override
-    public com.abhijeet.vitb.UnderbelyRetrieval.UnderbelyCategoryAdapter.UnderbelyCategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_underbely_category, parent, false);
-        return new com.abhijeet.vitb.UnderbelyRetrieval.UnderbelyCategoryAdapter.UnderbelyCategoryViewHolder(view);
+    public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
+        return new CategoryViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.abhijeet.vitb.UnderbelyRetrieval.UnderbelyCategoryAdapter.UnderbelyCategoryViewHolder holder, int position) {
-        UnderbelyCategory UnderbelyCategory = UnderbelyCategoryList.get(position);
-        holder.textCategoryName.setText(UnderbelyCategory.getCategoryName());
-
-        UnderbelyItemAdapter underbelyItemAdapter = new UnderbelyItemAdapter(UnderbelyCategory.getItems(), context);
-        holder.recyclerViewItems.setLayoutManager(new LinearLayoutManager(context));
-        holder.recyclerViewItems.setAdapter(underbelyItemAdapter);
+    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
+        UnderbelyCategory category = categoryList.get(position);
+        holder.bind(category);
     }
 
     @Override
     public int getItemCount() {
-        return UnderbelyCategoryList.size();
+        return categoryList.size();
     }
 
-    public static class UnderbelyCategoryViewHolder extends RecyclerView.ViewHolder{
-        private TextView textCategoryName;
-        public RecyclerView recyclerViewItems;
-        public UnderbelyCategoryViewHolder(@NonNull View itemView) {
+    public class CategoryViewHolder extends RecyclerView.ViewHolder {
+        private ImageView categoryImage;
+        private TextView categoryTitle;
+
+        public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            textCategoryName = itemView.findViewById(R.id.textCategoryName);
-            recyclerViewItems = itemView.findViewById(R.id.recyclerViewItems);
+            categoryImage = itemView.findViewById(R.id.categoryImage);
+            categoryTitle = itemView.findViewById(R.id.categoryTitle);
+
+            itemView.setOnClickListener(v -> {
+                for (UnderbelyCategory category : categoryList) {
+                    category.setSelected(false);
+                }
+                categoryList.get(getAdapterPosition()).setSelected(true);
+                notifyDataSetChanged();
+                categoryClickListener.onCategoryClick(categoryList.get(getAdapterPosition()));
+            });
+        }
+
+        public void bind(UnderbelyCategory category) {
+            // Load image using your preferred image loading library (e.g., Glide or Picasso)
+            // Glide.with(itemView).load(category.getImageUrl()).into(categoryImage);
+            categoryTitle.setText(category.getTitle());
+
+            if (category.isSelected()) {
+                itemView.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.light4));
+            } else {
+                itemView.setBackgroundColor(itemView.getContext().getResources().getColor(R.color.white));
+            }
         }
     }
 }

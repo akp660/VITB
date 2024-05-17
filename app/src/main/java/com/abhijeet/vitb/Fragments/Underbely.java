@@ -2,171 +2,205 @@ package com.abhijeet.vitb.Fragments;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.abhijeet.vitb.MayuriRetrieval.MayuriCategory;
+import com.abhijeet.vitb.MayuriRetrieval.MayuriCategoryAdapter;
+import com.abhijeet.vitb.MayuriRetrieval.MayuriItem;
+import com.abhijeet.vitb.MayuriRetrieval.MayuriItemAdapter;
 import com.abhijeet.vitb.R;
 import com.abhijeet.vitb.UnderbelyRetrieval.UnderbelyCategory;
 import com.abhijeet.vitb.UnderbelyRetrieval.UnderbelyCategoryAdapter;
-
+import com.abhijeet.vitb.UnderbelyRetrieval.UnderbelyItem;
+import com.abhijeet.vitb.UnderbelyRetrieval.UnderbelyItemAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Underbely#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Underbely extends Fragment {
+public class Underbely extends Fragment implements UnderbelyCategoryAdapter.OnCategoryClickListener {
+    private static final String UNDERBELY_CATEGORIES_KEY = "underbely_categories";
+    private RecyclerView recyclerViewItems;
+    private LinearLayout categoryContainer;
+    private ImageView refreshButton, selectedItem;
+    private List<UnderbelyCategory> underbelyCategoryList = new ArrayList<>();
+    private List<UnderbelyItem> itemList = new ArrayList<>();
+    private UnderbelyItemAdapter itemAdapter;
+    private UnderbelyCategoryAdapter categoryAdapter;
 
-    ImageView refresh_button, selected_item;
-
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private List<UnderbelyCategory> underbelyCategoryList;
-    private UnderbelyCategoryAdapter underbelyCategoryAdapter;
-    private RecyclerView recyclerView;
-
-    public Underbely() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Underbely.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Underbely newInstance(String param1, String param2) {
-        Underbely fragment = new Underbely();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_underbely, container, false);
+
+        recyclerViewItems = view.findViewById(R.id.recyclerViewItems);
+        categoryContainer = view.findViewById(R.id.categoryContainer);
+        refreshButton = view.findViewById(R.id.refresh_button);
+        selectedItem = view.findViewById(R.id.selected_item);
+
+        // Setup item RecyclerView
+        itemAdapter = new UnderbelyItemAdapter(itemList);
+        recyclerViewItems.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewItems.setAdapter(itemAdapter);
+
+        // Setup refresh button click listener
+        refreshButton.setOnClickListener(v -> {
+            // Handle refresh button click
+            rotateRefreshButton();
+            vibrate();
+            showRefreshToast();
+            // Refresh data from Firebase
+            fetchDataFromFirebase();
+        });
+
+        // Setup selected item click listener
+        selectedItem.setOnClickListener(v -> {
+            openBottomSheet();
+            haptic();
+        });
+
+        // Load data either from SharedPreferences or Firebase
+        loadData();
+
+        return view;
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String categoryJson = sharedPreferences.getString(UNDERBELY_CATEGORIES_KEY, null);
+
+        if (categoryJson != null) {
+            List<UnderbelyCategory> storedCategories = new Gson().fromJson(categoryJson, new TypeToken<List<UnderbelyCategory>>() {}.getType());
+            underbelyCategoryList.addAll(storedCategories);
+            populateCategoryContainer();
+        } else {
+            fetchDataFromFirebase();
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_underbely, container, false);
-
-        refresh_button = rootView.findViewById(R.id.refresh_button);
-//        refresh_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                RotateAnimation rotateAnimation = new RotateAnimation(360, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
-//                rotateAnimation.setDuration(500);
-//                refresh_button.startAnimation(rotateAnimation);
-//                vibrate();
-//
-//                // Show toast
-//                // Create custom toast
-//                LayoutInflater inflater = getLayoutInflater();
-//                View layout = inflater.inflate(R.layout.fragment_toast_layout, null); // Remove the toast_layout_root parameter
-//                TextView text = layout.findViewById(R.id.text_toast);
-//                text.setText("Refreshing...");
-//
-//                Toast toast = new Toast(requireContext());
-//                toast.setDuration(Toast.LENGTH_SHORT);
-//                toast.setView(layout);
-//                toast.show();
-//            }
-//        });
-
-
-        // on click listner on refresh button
-//        selected_item = rootView.findViewById(R.id.selected_item);
-//        selected_item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openBottomSheet();
-//                haptic();
-//            }
-//        });
-
-//        RecyclerView recyclerViewCategories = rootView.findViewById(R.id.underbelyRecyclerView);
-//        recyclerViewCategories.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//        underbelyCategoryList = new ArrayList<>();
-//        underbelyCategoryAdapter = new UnderbelyCategoryAdapter(underbelyCategoryList, getContext());
-//
-//        recyclerViewCategories.setAdapter(underbelyCategoryAdapter);
-//
-//
-//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Under_Belly");
-//
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                underbelyCategoryList.clear();
-//
-//                for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()){
-//                    String categoryName = categorySnapshot.getKey();
-//                    List<MayuriItem> items = new ArrayList<>();
-//
-//                    for (DataSnapshot itemSnapshot : categorySnapshot.child("Items").getChildren()){
-//                        MayuriItem mayuriItem = itemSnapshot.getValue(MayuriItem.class);
-//                        items.add(mayuriItem);
-//                    }
-//
-//                    MayuriCategory mayuriCategory = new MayuriCategory(categoryName, items);
-//                    underbelyCategoryList.add(underbelyCategory);
-//
-////                    MayuriItem mayuriItem = snapshot.getValue(MayuriItem.class);
-////                    Log.d("BookData", "Title: " + mayuriItem.getName() + ", Author: " + mayuriItem.getPrice());
-////                    mayuriItemList.add(mayuriItem);
-//                }
-//
-//                underbelyCategoryAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.d("MYLOG3", "Failed");
-//            }
-//        });
-
-        return rootView;
+    private void saveDataToSharedPreferences(List<UnderbelyCategory> categories) {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String categoryJson = new Gson().toJson(categories);
+        editor.putString(UNDERBELY_CATEGORIES_KEY, categoryJson);
+        editor.apply();
     }
 
+    private void fetchDataFromFirebase() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Under_Belly");
 
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                underbelyCategoryList.clear();
 
+                for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) {
+                    String categoryName = categorySnapshot.getKey();
+                    List<UnderbelyItem> items = new ArrayList<>();
 
-    // Define the vibrate method outside of the onClick method
+                    for (DataSnapshot itemSnapshot : categorySnapshot.child("Items").getChildren()) {
+                        UnderbelyItem item = itemSnapshot.getValue(UnderbelyItem.class);
+                        items.add(item);
+                    }
+
+                    UnderbelyCategory category = new UnderbelyCategory(categoryName, items);
+                    underbelyCategoryList.add(category);
+                }
+
+                populateCategoryContainer();
+                saveDataToSharedPreferences(underbelyCategoryList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Undebely", "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    private void populateCategoryContainer() {
+        categoryContainer.removeAllViews();
+
+        for (UnderbelyCategory category : underbelyCategoryList) {
+            View categoryView = LayoutInflater.from(getContext()).inflate(R.layout.item_category, categoryContainer, false);
+            ImageView categoryImage = categoryView.findViewById(R.id.categoryImage);
+            TextView categoryTitle = categoryView.findViewById(R.id.categoryTitle);
+
+            // Load image using your preferred image loading library (e.g., Glide or Picasso)
+            // Glide.with(this).load(category.getImageUrl()).into(categoryImage);
+            categoryTitle.setText(category.getTitle());
+
+            categoryView.setOnClickListener(v -> onCategoryClick(category));
+            categoryContainer.addView(categoryView);
+
+            if (category.isSelected()) {
+                categoryView.setBackgroundColor(getResources().getColor(R.color.light4));
+            } else {
+                categoryView.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+        }
+    }
+
+    private void loadItems(UnderbelyCategory category) {
+        itemList.clear();
+        itemList.addAll(category.getItems());
+        itemAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCategoryClick(UnderbelyCategory category) {
+        for (UnderbelyCategory cat : underbelyCategoryList) {
+            cat.setSelected(false);
+        }
+        category.setSelected(true);
+        populateCategoryContainer();
+        loadItems(category);
+    }
+    private void rotateRefreshButton() {
+        RotateAnimation rotateAnimation = new RotateAnimation(360, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+        rotateAnimation.setDuration(500);
+        refreshButton.startAnimation(rotateAnimation);
+    }
+
+    private void showRefreshToast() {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.fragment_toast_layout, null);
+        TextView text = layout.findViewById(R.id.text_toast);
+        text.setText("Refreshing...");
+        Toast toast = new Toast(requireContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
+
     private void vibrate() {
         Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator != null) {
@@ -193,17 +227,10 @@ public class Underbely extends Fragment {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottomsheetlayout);
-
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
-
-
 }
-
-
-
-

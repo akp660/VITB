@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.abhijeet.vitb.R;
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
-    private List<Category> categoryList;
+public class MayuriCategoryAdapter extends RecyclerView.Adapter<MayuriCategoryAdapter.CategoryViewHolder> {
+    private List<MayuriCategory> categoryList;
     private OnCategoryClickListener categoryClickListener;
 
     public interface OnCategoryClickListener {
-        void onCategoryClick(Category category);
+        void onCategoryClick(MayuriCategory category);
     }
 
-    public CategoryAdapter(List<Category> categoryList, OnCategoryClickListener categoryClickListener) {
+    public MayuriCategoryAdapter(List<MayuriCategory> categoryList, OnCategoryClickListener categoryClickListener) {
         this.categoryList = categoryList;
         this.categoryClickListener = categoryClickListener;
     }
@@ -32,7 +32,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        Category category = categoryList.get(position);
+        MayuriCategory category = categoryList.get(position);
         holder.bind(category);
     }
 
@@ -51,7 +51,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             categoryTitle = itemView.findViewById(R.id.categoryTitle);
 
             itemView.setOnClickListener(v -> {
-                for (Category category : categoryList) {
+                for (MayuriCategory category : categoryList) {
                     category.setSelected(false);
                 }
                 categoryList.get(getAdapterPosition()).setSelected(true);
@@ -60,7 +60,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             });
         }
 
-        public void bind(Category category) {
+        public void bind(MayuriCategory category) {
             // Load image using your preferred image loading library (e.g., Glide or Picasso)
             // Glide.with(itemView).load(category.getImageUrl()).into(categoryImage);
             categoryTitle.setText(category.getTitle());
