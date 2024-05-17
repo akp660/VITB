@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.abhijeet.vitb.MayuriRetrieval.MayuriCategory;
-import com.abhijeet.vitb.MayuriRetrieval.MayuriItemAdapter;
 import com.abhijeet.vitb.R;
 
 import java.util.List;

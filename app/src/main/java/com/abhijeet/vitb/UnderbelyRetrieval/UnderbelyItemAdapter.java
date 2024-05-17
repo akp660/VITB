@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.abhijeet.vitb.MayuriRetrieval.MayuriItem;
-import com.abhijeet.vitb.MayuriRetrieval.MayuriItemViewHolder;
 import com.abhijeet.vitb.R;
 
 import java.util.List;
