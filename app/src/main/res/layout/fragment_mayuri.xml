@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:paddingVertical="10dp"
                     android:scrollbars="horizontal"
-                    android:fadeScrollbars="false"
+                    android:fadeScrollbars="true"
                     android:scrollbarSize="4dp"
                     android:scrollbarThumbVertical="@android:color/darker_gray"
                     android:scrollbarThumbHorizontal="@android:color/darker_gray">
@@ -169,8 +169,8 @@
 
                     <ImageView
                         android:id="@+id/refresh_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="31dp"
+                        android:layout_height="31dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"

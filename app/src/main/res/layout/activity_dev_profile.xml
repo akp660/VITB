@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dev_profile"
     android:background="#9BA3EB">
 
     <androidx.cardview.widget.CardView
@@ -129,8 +128,7 @@
                         <ImageView
                             android:id="@+id/profile"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/abhijeet" />
+                            android:layout_height="match_parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
