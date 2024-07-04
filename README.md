@@ -4,7 +4,7 @@
 
 1. **Clone the Repository:**
     ```sh
-    git clone https://github.com/your-username/VIT-B.git
+    git clone https://github.com/akp660/VITB.git
     cd VIT-B
     ```
    
