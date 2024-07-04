@@ -1,4 +1,5 @@
 # VIT-B
+
 ## How to Use the VIT-B Android Project
 
 1. **Clone the Repository:**
@@ -35,12 +36,12 @@ This app shows the Mess-Menu of VIT Bhopal and allows you to connect with the VT
 
 ### Play Store
 
-You can download the app from the Play Store [here]([https://play.google.com/store/apps/details?id=com.yourapp.foody](https://play.google.com/store/apps/details?id=com.abhijeet.vitb)).
+You can download the app from the Play Store [here](https://play.google.com/store/apps/details?id=com.abhijeet.vitb).
 
 ### Screenshots
 
 <div style="text-align: center;">
-    <img src="https://github.com/akp660/VITB/assets/72183243/7ebdc91b-10f2-4e47-997d-2db6fc85ab6f" alt="Screenshot 1" style="width: 300px; height: auto;">
+    <img src="https://github.com/akp660/VITB/assets/72183243/7ebdc91b-10f2-4e47-997d-2db6fc85ab6f" alt="Screenshot 1" style="width: 600px; height: auto;">
 </div>
 <div style="display: flex; justify-content: center;">
     <img src="https://github.com/akp660/VITB/assets/72183243/ae008a61-ee64-4f4d-b2b9-02b14dd0d272" alt="Screenshot 2" style="width: 300px; height: auto; margin-right: 10px;">
