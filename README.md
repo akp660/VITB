@@ -38,7 +38,11 @@ This app shows the Mess-Menu of VIT Bhopal and allows you to connect with the VT
 You can download the app from the Play Store [here]([https://play.google.com/store/apps/details?id=com.yourapp.foody](https://play.google.com/store/apps/details?id=com.abhijeet.vitb)).
 
 ### Screenshots
-![unnamed](https://github.com/akp660/VITB/assets/72183243/7ebdc91b-10f2-4e47-997d-2db6fc85ab6f)
-![unnamed (1)](https://github.com/akp660/VITB/assets/72183243/ae008a61-ee64-4f4d-b2b9-02b14dd0d272)
-![unnamed (2)](https://github.com/akp660/VITB/assets/72183243/b38b046f-5236-4877-a9a2-fed837765fee)
 
+<div style="text-align: center;">
+    <img src="https://github.com/akp660/VITB/assets/72183243/7ebdc91b-10f2-4e47-997d-2db6fc85ab6f" alt="Screenshot 1" style="width: 300px; height: auto;">
+</div>
+<div style="display: flex; justify-content: center;">
+    <img src="https://github.com/akp660/VITB/assets/72183243/ae008a61-ee64-4f4d-b2b9-02b14dd0d272" alt="Screenshot 2" style="width: 300px; height: auto; margin-right: 10px;">
+    <img src="https://github.com/akp660/VITB/assets/72183243/b38b046f-5236-4877-a9a2-fed837765fee" alt="Screenshot 3" style="width: 300px; height: auto;">
+</div>
