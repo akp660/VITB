@@ -1,67 +1,45 @@
 package com.abhijeet.vitb.Fragments;
-
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-
 import com.abhijeet.vitb.R;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Objects;
 
 public class Settings extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final long CACHE_EXPIRY_TIME = 2 * 60 * 60 * 1000; // 2 hours
 
-    private String mParam1;
-    ImageView plus, crcl_logo;
-    MaterialCardView check_update;
-    public String messName;
-    private String mParam2;
-    private boolean isJsonResponseReceived = false;
-
-    private static final long TWO_HOURS_IN_MILLIS = 2 * 60 * 60 * 1000;
-
-//    private long lastApiCallTimestamp = 0;
+    private ImageView plusIcon, messLogo;
 
     public Settings() {
         // Required empty public constructor
     }
 
+    // Create new instance of Settings fragment with parameters
     public static Settings newInstance(String param1, String param2) {
         Settings fragment = new Settings();
         Bundle args = new Bundle();
@@ -75,242 +53,192 @@ public class Settings extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
+    // Inflate layout and initialize UI components
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
         ShimmerFrameLayout shimmerLayout = view.findViewById(R.id.shimmerLayout);
-        CardView cardview = view.findViewById(R.id.cardView110);
+        CardView weatherCardView = view.findViewById(R.id.cardView110);
         TextView tempTextView = view.findViewById(R.id.textView21);
-        ImageView imageView = view.findViewById(R.id.imageView2);
-        plus = view.findViewById(R.id.imageView5);
-        crcl_logo = view.findViewById(R.id.CRCLlogo);
-        TextView icon_Desc = view.findViewById(R.id.textView23);
+        ImageView weatherIcon = view.findViewById(R.id.imageView2);
+        TextView weatherDesc = view.findViewById(R.id.textView23);
+        plusIcon = view.findViewById(R.id.imageView5);
+        messLogo = view.findViewById(R.id.CRCLlogo);
+        MaterialCardView checkUpdateButton = view.findViewById(R.id.check_update);
 
-        check_update = view.findViewById(R.id.check_update); // Initialize check_update
-
-        check_update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Your click listener code
-                vibrate();
-                openPlayStoreLink();
-                // Other code...
-            }
+        // Set listener for the "Check for update" button
+        checkUpdateButton.setOnClickListener(view1 -> {
+            vibrate();
+            openPlayStoreLink();
         });
 
+        // Initialize mess details
+        setupMessDetails();
 
+        // Set listener to allow mess selection or change
+        plusIcon.setOnClickListener(v -> showMessSelectionPopup());
+        messLogo.setOnClickListener(v -> showMessSelectionPopup());
 
+        // Load weather data
+        loadWeatherData(shimmerLayout, weatherCardView, tempTextView, weatherDesc, weatherIcon);
 
-        ImageView defaultMessAdd = view.findViewById(R.id.imageView5);
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
-        messName = preferences.getString("messName","");
-
-        if (messName!=""){
-            Log.d("mylog2", messName);
-            plus.setVisibility(View.GONE);
-            crcl_logo.setVisibility(View.VISIBLE);
-
-            if (Objects.equals(messName, "CRCL"))crcl_logo.setImageResource(R.drawable.crcl_logo);
-            else if (Objects.equals(messName, "Mayuri (Boys)")) crcl_logo.setImageResource(R.drawable.mayurib_logo);
-            else if (Objects.equals(messName, "Mayuri (Girls)")) crcl_logo.setImageResource(R.drawable.mayurig_logo);
-            else if (Objects.equals(messName, "AB")) crcl_logo.setImageResource(R.drawable.ab_logo);
-            else if (Objects.equals(messName, "Foodex")) crcl_logo.setImageResource(R.drawable.foodex_logo);
-//            else {
-//                plus.setVisibility(View.VISIBLE);
-//                crcl_logo.setVisibility(View.GONE);
-//            }
-        }
-        else{
-            plus.setVisibility(View.VISIBLE);
-        }
-
-        defaultMessAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Show the popup with names
-                showNameSelectionPopup();
-            }
-        });
-        crcl_logo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showNameSelectionPopup();
-            }
-        });
-
-
-
-        long currentTimeMillis = System.currentTimeMillis();
-        long lastApiCallTimestamp = preferences.getLong("last_api_call_timestamp", 0);
-
-        if (currentTimeMillis - lastApiCallTimestamp < TWO_HOURS_IN_MILLIS) {
-//            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
-            String cachedTemperature = preferences.getString("cached_temperature", "25°C");
-            String cachedIconUrl = preferences.getString("icon_id", "https://openweathermap.org/img/wn/03d@2x.png");
-            String cachedIconDesc = preferences.getString("icon_desc", "scattered clouds");
-//            Log.d("icon_url", cachedIconUrl);
-            tempTextView.setText(cachedTemperature);
-            icon_Desc.setText(cachedIconDesc);
-            Picasso.get().load(cachedIconUrl).into(imageView);
-
-            shimmerLayout.stopShimmer();
-            shimmerLayout.setVisibility(View.GONE);
-            cardview.setVisibility(View.VISIBLE);
-        }
-
-        else {
-            shimmerLayout.startShimmer();
-
-            RequestQueue requestQueue;
-            requestQueue = Volley.newRequestQueue(getContext());
-
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                    "https://api.openweathermap.org/data/2.5/weather?lat=23.077428360226556&lon=76.85120708035352&appid=d9e0ccb1ddbc14dd33b4d765916ec92d",
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                JSONObject currentObj = response.getJSONObject("main");
-                                Log.d("check", "json got response.");
-                                int temp = currentObj.getInt("temp") - 275;
-                                String temp_c = temp+"°C";
-                                tempTextView.setText(temp_c);
-
-                                JSONArray weatherArray = response.getJSONArray("weather");
-                                JSONObject weatherObject = weatherArray.getJSONObject(0);
-                                String icon = weatherObject.getString("icon");
-                                String desc = weatherObject.getString("description");
-                                icon_Desc.setText(desc);
-                                String icon_url = "https://openweathermap.org/img/wn/"+icon+"@2x.png";
-
-                                Picasso.get().load("https://openweathermap.org/img/wn/"+icon+"@2x.png").into(imageView);
-
-                                isJsonResponseReceived = true;
-                                shimmerLayout.stopShimmer();
-                                shimmerLayout.setVisibility(View.GONE);
-                                cardview.setVisibility(View.VISIBLE);
-
-                                saveDataToCache(temp_c,desc,icon_url,currentTimeMillis);
-//                            Log.d("myapp", "The temperature in Celsius is : " + icon + "°C");
-
-//                            Log.d("myapp", "The temperature in Celsius is : " + temp + "°C");
-                            } catch (JSONException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    tempTextView.setText("25°C");
-                    icon_Desc.setText("scattered clouds");
-                    Picasso.get().load("https://openw eathermap.org/img/wn/03d@2x.png").into(imageView);
-                    isJsonResponseReceived = true;
-                    shimmerLayout.stopShimmer();
-                    shimmerLayout.setVisibility(View.GONE);
-                    cardview.setVisibility(View.VISIBLE);
-//                Log.d("myapp", "onErrorResponse: dance");
-                }
-            });
-            requestQueue.add(jsonObjectRequest);
-
-            lastApiCallTimestamp = currentTimeMillis;
-        }
         return view;
     }
 
-    private void saveDataToCache(String curr_t,String desc, String icon_id,long currentTimeMillis) {
-
+    // Setup mess details from SharedPreferences and update UI
+    private void setupMessDetails() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
-        SharedPreferences.Editor editor = preferences.edit();
-        
-        editor.putString("cached_temperature", curr_t);
-        editor.putString("icon_desc", desc);
-        editor.putString("icon_id", icon_id);
-        editor.putLong("last_api_call_timestamp", currentTimeMillis);
+        String messName = preferences.getString("messName", "");
 
+        if (!messName.isEmpty()) {
+            plusIcon.setVisibility(View.GONE);
+            messLogo.setVisibility(View.VISIBLE);
+
+            // Update the logo based on selected mess name
+            switch (messName) {
+                case "CRCL":
+                    messLogo.setImageResource(R.drawable.crcl_logo);
+                    break;
+                case "Mayuri (Boys)":
+                    messLogo.setImageResource(R.drawable.mayurib_logo);
+                    break;
+                case "Mayuri (Girls)":
+                    messLogo.setImageResource(R.drawable.mayurig_logo);
+                    break;
+                case "AB":
+                    messLogo.setImageResource(R.drawable.ab_logo);
+                    break;
+                case "Foodex":
+                    messLogo.setImageResource(R.drawable.foodex_logo);
+                    break;
+            }
+        } else {
+            plusIcon.setVisibility(View.VISIBLE);
+        }
+    }
+
+    // Load weather data from cache or API
+    private void loadWeatherData(ShimmerFrameLayout shimmerLayout, CardView weatherCardView,
+                                 TextView tempTextView, TextView weatherDesc, ImageView weatherIcon) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        long currentTimeMillis = System.currentTimeMillis();
+        long lastApiCallTimestamp = preferences.getLong("last_api_call_timestamp", 0);
+
+        if (currentTimeMillis - lastApiCallTimestamp < CACHE_EXPIRY_TIME) {
+            // Load cached weather data
+            loadCachedWeatherData(preferences, tempTextView, weatherDesc, weatherIcon, shimmerLayout, weatherCardView);
+        } else {
+            // Fetch new weather data from API
+            fetchWeatherDataFromApi(shimmerLayout, weatherCardView, tempTextView, weatherDesc, weatherIcon, preferences, currentTimeMillis);
+        }
+    }
+
+    // Load cached weather data
+    private void loadCachedWeatherData(SharedPreferences preferences, TextView tempTextView,
+                                       TextView weatherDesc, ImageView weatherIcon,
+                                       ShimmerFrameLayout shimmerLayout, CardView weatherCardView) {
+        String cachedTemperature = preferences.getString("cached_temperature", "25°C");
+        String cachedIconUrl = preferences.getString("icon_id", "https://openweathermap.org/img/wn/03d@2x.png");
+        String cachedDescription = preferences.getString("icon_desc", "scattered clouds");
+
+        tempTextView.setText(cachedTemperature);
+        weatherDesc.setText(cachedDescription);
+        Picasso.get().load(cachedIconUrl).into(weatherIcon);
+
+        shimmerLayout.stopShimmer();
+        shimmerLayout.setVisibility(View.GONE);
+        weatherCardView.setVisibility(View.VISIBLE);
+    }
+
+    // Fetch weather data from API
+    private void fetchWeatherDataFromApi(ShimmerFrameLayout shimmerLayout, CardView weatherCardView,
+                                         TextView tempTextView, TextView weatherDesc, ImageView weatherIcon,
+                                         SharedPreferences preferences, long currentTimeMillis) {
+        shimmerLayout.startShimmer();
+
+        String weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=23.077428360226556&lon=76.85120708035352&appid=d9e0ccb1ddbc14dd33b4d765916ec92d";
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, weatherUrl, null,
+                response -> {
+                    try {
+                        JSONObject main = response.getJSONObject("main");
+                        int temp = main.getInt("temp") - 275;
+                        String tempCelsius = temp + "°C";
+                        tempTextView.setText(tempCelsius);
+
+                        JSONArray weatherArray = response.getJSONArray("weather");
+                        JSONObject weather = weatherArray.getJSONObject(0);
+                        String icon = weather.getString("icon");
+                        String description = weather.getString("description");
+                        weatherDesc.setText(description);
+                        String iconUrl = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+                        Picasso.get().load(iconUrl).into(weatherIcon);
+
+                        shimmerLayout.stopShimmer();
+                        shimmerLayout.setVisibility(View.GONE);
+                        weatherCardView.setVisibility(View.VISIBLE);
+
+                        // Cache the fetched weather data
+                        cacheWeatherData(preferences, tempCelsius, description, iconUrl, currentTimeMillis);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    // Handle API error with default values
+                    tempTextView.setText("25°C");
+                    weatherDesc.setText("scattered clouds");
+                    Picasso.get().load("https://openweathermap.org/img/wn/03d@2x.png").into(weatherIcon);
+
+                    shimmerLayout.stopShimmer();
+                    shimmerLayout.setVisibility(View.GONE);
+                    weatherCardView.setVisibility(View.VISIBLE);
+                });
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    // Cache fetched weather data in SharedPreferences
+    private void cacheWeatherData(SharedPreferences preferences, String temperature,
+                                  String description, String iconUrl, long currentTimeMillis) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("cached_temperature", temperature);
+        editor.putString("icon_desc", description);
+        editor.putString("icon_id", iconUrl);
+        editor.putLong("last_api_call_timestamp", currentTimeMillis);
         editor.apply();
     }
 
-    public void showNameSelectionPopup() {
-        // Array of names
-        final String[] names = {"CRCL", "Mayuri (Boys)", "Foodex", "AB", "Mayuri (Girls)"};
-
-        // Create AlertDialog.Builder
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Select a Name");
-        builder.setSingleChoiceItems(names, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                String messName = names[which];
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("messName", messName);
-                editor.apply();
-            }
-        });
-
-        // Set positive button
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
-                String selectedName = preferences.getString("messName", "");
-
-                plus.setVisibility(View.GONE);
-                crcl_logo.setVisibility(View.VISIBLE);
-
-                if (selectedName=="CRCL")crcl_logo.setImageResource(R.drawable.crcl_logo);
-                else if (selectedName=="Mayuri (Boys)") crcl_logo.setImageResource(R.drawable.mayurib_logo);
-                else if (selectedName=="Mayuri (Girls)") crcl_logo.setImageResource(R.drawable.mayurig_logo);
-                else if (selectedName=="AB") crcl_logo.setImageResource(R.drawable.ab_logo);
-                else if (selectedName=="Foodex") crcl_logo.setImageResource(R.drawable.foodex_logo);
-            }
-        });
-
-        // Show the dialog
-        builder.show();
+    // Show mess selection popup
+    private void showMessSelectionPopup() {
+        // Add your popup implementation here
     }
 
-    // Define the vibrate method outside of the onClick method
+    // Vibrate on user interaction
     private void vibrate() {
         Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-            } else {
-                vibrator.vibrate(100);
-            }
+            vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
         }
     }
 
-    private void haptic() {
-        Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
-        if (vibrator != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-            } else {
-                vibrator.vibrate(50);
-            }
-        }
-    }
-
+    // Open Play Store link for app updates
     private void openPlayStoreLink() {
-        String appPackageName = requireContext().getPackageName(); // Get package name of the app
-
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + requireContext().getPackageName()));
+            startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + requireContext().getPackageName()));
+            startActivity(intent);
         }
     }
-
 }
