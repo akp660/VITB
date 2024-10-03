@@ -147,7 +147,7 @@ public class Mayuri extends Fragment implements MayuriCategoryAdapter.OnCategory
 
         for (MayuriCategory category : mayuriCategoryList) {
             View categoryView = LayoutInflater.from(getContext()).inflate(R.layout.item_category, categoryContainer, false);
-            ImageView categoryImage = categoryView.findViewById(R.id.categoryImage);
+            //ImageView categoryImage = categoryView.findViewById(R.id.categoryImage);
             TextView categoryTitle = categoryView.findViewById(R.id.categoryTitle);
 
             // Load image using your preferred image loading library (e.g., Glide or Picasso)
