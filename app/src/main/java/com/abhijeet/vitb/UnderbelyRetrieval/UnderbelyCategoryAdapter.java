@@ -47,7 +47,7 @@ public class UnderbelyCategoryAdapter extends RecyclerView.Adapter<UnderbelyCate
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            categoryImage = itemView.findViewById(R.id.categoryImage);
+            //categoryImage = itemView.findViewById(R.id.categoryImage);
             categoryTitle = itemView.findViewById(R.id.categoryTitle);
 
             itemView.setOnClickListener(v -> {
