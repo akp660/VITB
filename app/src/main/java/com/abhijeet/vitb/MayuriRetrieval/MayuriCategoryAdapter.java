@@ -47,7 +47,7 @@ public class MayuriCategoryAdapter extends RecyclerView.Adapter<MayuriCategoryAd
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            categoryImage = itemView.findViewById(R.id.categoryImage);
+            //categoryImage = itemView.findViewById(R.id.categoryImage);
             categoryTitle = itemView.findViewById(R.id.categoryTitle);
 
             itemView.setOnClickListener(v -> {
