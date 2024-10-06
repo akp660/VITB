@@ -20,7 +20,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -32,11 +31,12 @@
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/jua"
-                    android:textColor="@color/black"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/nunito"
                     android:text="Weather"
+                    android:textColor="@color/black"
                     android:textSize="24sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -153,12 +153,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
-                            android:layout_marginTop="25dp"
-                            android:fontFamily="@font/jua"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/nunito"
                             android:text="VIT Bhopal\nUniversity"
                             android:textAlignment="textStart"
                             android:textColor="#191919"
                             android:textSize="22sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -168,11 +169,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
-                            android:fontFamily="@font/jua"
+                            android:fontFamily="@font/nunito"
                             android:text="Kothri-Kalan\n411661"
                             android:textAlignment="textStart"
                             android:textColor="#191919"
                             android:textSize="22sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/textView120" />
 
@@ -190,16 +192,16 @@
                             android:id="@+id/textView121"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:layout_marginEnd="20sp"
                             android:background="#E6ECFF"
+                            android:fontFamily="@font/nunito"
                             android:text=""
-                            android:layout_marginTop="5dp"
                             android:textColor="#191919"
                             android:textSize="24dp"
-                            android:fontFamily="@font/jua"
-                            app:layout_constraintTop_toBottomOf="@id/imageView12"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@id/imageView12"/>
+                            app:layout_constraintStart_toStartOf="@id/imageView12"
+                            app:layout_constraintTop_toBottomOf="@id/imageView12" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -210,10 +212,12 @@
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/jua"
+                    android:layout_marginTop="100dp"
+                    android:fontFamily="@font/nunito"
                     android:text="App Default Settings"
                     android:textColor="@color/black"
                     android:textSize="24sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -243,7 +247,7 @@
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="25dp"
                             android:layout_marginBottom="25dp"
-                            android:fontFamily="@font/jua"
+                            android:fontFamily="@font/nunito"
                             android:text="Default mess type"
                             android:textColor="#191919"
                             android:textSize="22sp"
@@ -284,10 +288,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="@font/jua"
-                    android:textColor="@color/black"
+                    android:fontFamily="@font/nunito"
                     android:text="Account Setting"
+                    android:textColor="@color/black"
                     android:textSize="24sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView10" />
@@ -336,7 +341,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/jua"
+                                    android:fontFamily="@font/nunito"
                                     android:text="Check For Update "
                                     android:textColor="@color/black"
                                     android:textSize="20sp"

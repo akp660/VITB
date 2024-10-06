@@ -1,4 +1,5 @@
 package com.abhijeet.vitb.Fragments;
+
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -220,7 +221,30 @@ public class Settings extends Fragment {
 
     // Show mess selection popup
     private void showMessSelectionPopup() {
-        // Add your popup implementation here
+        // List of mess options
+        final String[] messOptions = {"CRCL", "Mayuri (Boys)", "Mayuri (Girls)", "AB", "Foodex"};
+
+        // Build an AlertDialog
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(requireContext());
+        builder.setTitle("Select Mess");
+
+        // Set the list of mess options
+        builder.setItems(messOptions, (dialog, which) -> {
+            // Get the selected mess name
+            String selectedMess = messOptions[which];
+
+            // Save the selected mess in SharedPreferences
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("messName", selectedMess);
+            editor.apply();
+
+            // Update the mess logo
+            setupMessDetails();
+        });
+
+        // Show the AlertDialog
+        builder.show();
     }
 
     // Vibrate on user interaction
