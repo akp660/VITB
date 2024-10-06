@@ -117,31 +117,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="70dp"
                 android:orientation="vertical"
                 android:paddingBottom="20dp"
-                app:layout_constraintTop_toBottomOf="@id/imageView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"
-                    android:scrollbars="horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:fadeScrollbars="true"
+                    android:paddingVertical="10dp"
                     android:scrollbarSize="4dp"
-                    android:scrollbarThumbVertical="@android:color/darker_gray"
-                    android:scrollbarThumbHorizontal="@android:color/darker_gray">
+                    android:scrollbars="none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
                         android:id="@+id/categoryContainer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="@android:color/transparent"/>
+                        android:background="@android:color/transparent"
+                        android:orientation="horizontal" />
                 </HorizontalScrollView>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -149,8 +155,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginBottom="20dp"/>
-            </LinearLayout>
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="50sp"
