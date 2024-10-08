@@ -1,5 +1,6 @@
 package com.abhijeet.vitb.Fragments;
 
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +13,10 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -221,31 +225,40 @@ public class Settings extends Fragment {
 
     // Show mess selection popup
     private void showMessSelectionPopup() {
-        // List of mess options
-        final String[] messOptions = {"CRCL", "Mayuri (Boys)", "Mayuri (Girls)", "AB", "Foodex"};
+        // Create a Dialog
+        Dialog dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.mess_selection_popup); // Use your layout file here
+        dialog.setCancelable(true);
 
-        // Build an AlertDialog
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(requireContext());
-        builder.setTitle("Select Mess");
+        // Setup your ListView and other components here
+        ListView messOptionsList = dialog.findViewById(R.id.mess_options_list);
+        String[] messOptions = {"CRCL", "Mayuri (Boys)", "Mayuri (Girls)", "AB", "Foodex"};
 
-        // Set the list of mess options
-        builder.setItems(messOptions, (dialog, which) -> {
-            // Get the selected mess name
-            String selectedMess = messOptions[which];
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, messOptions);
+        messOptionsList.setAdapter(adapter);
 
+        // Handle item clicks
+        messOptionsList.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedMess = messOptions[position];
             // Save the selected mess in SharedPreferences
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("messName", selectedMess);
             editor.apply();
 
-            // Update the mess logo
+            // Update the mess logo (or other UI)
             setupMessDetails();
+
+            dialog.dismiss(); // Close the dialog
         });
 
-        // Show the AlertDialog
-        builder.show();
+        // Show the dialog
+        dialog.show();
     }
+
+
+
 
     // Vibrate on user interaction
     private void vibrate() {
