@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal" />
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_crcl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CRCL" />
+
+        <RadioButton
+            android:id="@+id/radio_mayuri_boys"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mayuri (Boys)" />
+
+        <RadioButton
+            android:id="@+id/radio_foodex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Foodex" />
+
+        <RadioButton
+            android:id="@+id/radio_ab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AB" />
+
+        <RadioButton
+            android:id="@+id/radio_mayuri_girls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mayuri (Girls)" />
+
+    </RadioGroup>
+
+</LinearLayout>
