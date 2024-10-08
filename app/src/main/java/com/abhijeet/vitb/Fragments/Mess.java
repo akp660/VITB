@@ -2,6 +2,7 @@ package com.abhijeet.vitb.Fragments;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -16,7 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -427,38 +431,68 @@ public class Mess extends Fragment {
     }
 
     public void showNameSelectionPopup(String day) {
-        // Array of names
+        // Inflate the custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.popup_mess_selection, null);
 
-        final String[] names = {"CRCL", "Mayuri (Boys)", "Foodex", "AB", "Mayuri (Girls)"};
-
-        // Create AlertDialog.Builder
+        // Create the AlertDialog.Builder
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Select a Name");
-        builder.setSingleChoiceItems(names, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Set the selected name to textView
-                String Name = names[which];
-                messName = Name;
-                textView.setText(Name);
+        builder.setView(dialogView);
 
-                MessMenuRetrieval(messName, day);
-            }
+        // Get references to the RadioButtons
+        RadioButton radioCrcl = dialogView.findViewById(R.id.radio_crcl);
+        RadioButton radioMayuriBoys = dialogView.findViewById(R.id.radio_mayuri_boys);
+        RadioButton radioFoodex = dialogView.findViewById(R.id.radio_foodex);
+        RadioButton radioAB = dialogView.findViewById(R.id.radio_ab);
+        RadioButton radioMayuriGirls = dialogView.findViewById(R.id.radio_mayuri_girls);
 
-        });
+        // Set the previously selected option if any
+        switch (messName) {
+            case "CRCL":
+                radioCrcl.setChecked(true);
+                break;
+            case "Mayuri (Boys)":
+                radioMayuriBoys.setChecked(true);
+                break;
+            case "Foodex":
+                radioFoodex.setChecked(true);
+                break;
+            case "AB":
+                radioAB.setChecked(true);
+                break;
+            case "Mayuri (Girls)":
+                radioMayuriGirls.setChecked(true);
+                break;
+        }
 
-        // Set positive button
+        // Set the positive button
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Do nothing, just dismiss the dialog
+                // Determine which RadioButton was selected
+                if (radioCrcl.isChecked()) {
+                    messName = "CRCL";
+                } else if (radioMayuriBoys.isChecked()) {
+                    messName = "Mayuri (Boys)";
+                } else if (radioFoodex.isChecked()) {
+                    messName = "Foodex";
+                } else if (radioAB.isChecked()) {
+                    messName = "AB";
+                } else if (radioMayuriGirls.isChecked()) {
+                    messName = "Mayuri (Girls)";
+                }
+
+                textView.setText(messName);
+                MessMenuRetrieval(messName, day);
             }
         });
 
-        // Show the dialog
-        builder.show();
-
+        // Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
+
+
 
 
     private String getDayOfWeekString(int dayOfWeek) {
