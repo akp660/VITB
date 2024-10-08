@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.abhijeet.vitb">
+    package="com.abhijeet.vitb" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -15,13 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VITB"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".popup_mess_selection"
+            android:exported="false" />
+        <activity
+            android:name=".mess_selection_popup"
+            android:exported="false" />
         <activity
             android:name=".Activities.loading_animation"
             android:exported="false" />
         <activity
             android:name=".Activities.home_page"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
