@@ -82,26 +82,23 @@ public class Mess extends Fragment {
 
         refresh_button = rootView.findViewById(R.id.refresh_button);
 
-        refresh_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RotateAnimation rotateAnimation = new RotateAnimation(360, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
-                rotateAnimation.setDuration(500);
-                refresh_button.startAnimation(rotateAnimation);
-                MessMenuRetrieval(messName,day);
-                vibrate();
+        refresh_button.setOnClickListener(view -> {
+            RotateAnimation rotateAnimation = new RotateAnimation(360, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+            rotateAnimation.setDuration(500);
+            refresh_button.startAnimation(rotateAnimation);
+            MessMenuRetrieval(messName,day);
+            vibrate();
 
-                // Create custom toast
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.fragment_toast_layout, null); // Remove the toast_layout_root parameter
-                TextView text = layout.findViewById(R.id.text_toast);
-                text.setText("Refreshing...");
+            // Create custom toast
+            LayoutInflater inflater1 = getLayoutInflater();
+            View layout = inflater1.inflate(R.layout.fragment_toast_layout, null); // Remove the toast_layout_root parameter
+            TextView text = layout.findViewById(R.id.text_toast);
+            text.setText("Refreshing...");
 
-                Toast toast = new Toast(requireContext());
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setView(layout);
-                toast.show();
-            }
+            Toast toast = new Toast(requireContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
         });
 
 
@@ -124,12 +121,15 @@ public class Mess extends Fragment {
         dinnerNonVegDivider = rootView.findViewById(R.id.divider10);
         dinnerSides = rootView.findViewById(R.id.dinnerSides);
         dinnerStaples = rootView.findViewById(R.id.dinnerStaples);
-
         text = rootView.findViewById(R.id.text);
         text2 = rootView.findViewById(R.id.text2);
         ImageView imageView = rootView.findViewById(R.id.mess_selection);
         textView = rootView.findViewById(R.id.mess_name);
         CardView calender = rootView.findViewById(R.id.calender);
+
+
+
+
 
         Calendar calendar = Calendar.getInstance();
         int initialYear = calendar.get(Calendar.YEAR);
@@ -263,6 +263,7 @@ public class Mess extends Fragment {
                         Log.w("my1log", "Failed to read value.", error.toException());
                     }
                 });
+
 
         mDatabase.child("Mess").child(messName).child(day).child("Lunch").child("NonVeg")
                 .addValueEventListener(new ValueEventListener() {
